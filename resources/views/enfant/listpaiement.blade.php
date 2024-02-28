@@ -9,11 +9,13 @@
     @endif
 
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h1 class="mt-5 mb-4">Liste de Paiements des Assurence</h1>
+        <div class="col-md-8"> 
             <div class="mb-3">
                 <a href="{{ route('enfant.paiement') }}" class="btn btn-success">Ajouter Paiement</a>
             </div>
+            @foreach($groupedPaiements as $annee => $paiements)
+            <h3>Paiement pour : {{ $annee }}</h3>
+           
             <table class="table">
                 <thead>
                     <tr>
@@ -67,6 +69,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endforeach
         </div>
     </div>
 </div>

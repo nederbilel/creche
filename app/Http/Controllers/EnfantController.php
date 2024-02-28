@@ -149,19 +149,22 @@ class EnfantController extends Controller
     
 
     //liste des paiement
-    public function enfant()
-    {
-        return $this->belongsTo(Enfant::class);
-    }
+   
+
     public function paiementList()
     {
         // Fetch all paiements with associated enfant details
         $paiements = PaiementAssurence::with('enfant')->get();
+    
+        // Group paiements by 'annee'
+        $groupedPaiements = $paiements->groupBy('annee');
+    
         $enfants = Enfant::all();
-
-        // Pass the paiements data to the view
-        return view('enfant.listpaiement', ['paiements' => $paiements],['enfants' => $enfants]);
+    
+        // Pass the grouped paiements data to the view
+        return view('enfant.listpaiement', ['groupedPaiements' => $groupedPaiements, 'enfants' => $enfants]);
     }
+    
 
   
     public function editpaiement(PaiementAssurence $paiement)
