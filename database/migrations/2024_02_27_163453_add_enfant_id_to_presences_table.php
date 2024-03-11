@@ -11,12 +11,12 @@ class AddEnfantIdToPresencesTable extends Migration
     public function up()
     {
         Schema::table('presences', function (Blueprint $table) {
-            // $table->unsignedBigInteger('enfant_id');
+            $table->unsignedBigInteger('enfant_id');
 
-            // $table->foreign('enfant_id')
-            //       ->references('id')
-            //       ->on('enfants')
-            //       ->onDelete('cascade');
+            $table->foreign('enfant_id')
+                  ->references('id')
+                  ->on('enfants')
+                  ->onDelete('cascade');
         });
     }
 

@@ -49,7 +49,7 @@ Route::get('/enfant/{enfant}/presence/pdf/{year}/{month}', [EnfantController::cl
 
 
 
-Route::get('/paiement', [EnfantController::class, 'showPaiementView'])->name('enfant.paiement');
+Route::get('/paiement', [EnfantController::class, 'showPaiementView'])->name('enfant.paiement'); // form paiement
 Route::get('/paiements/{paiement}/edit', [EnfantController::class, 'editpaiement'])->name('enfant.editpaiement');
 Route::delete('/destroypaiement/{paiement}', [EnfantController::class, 'destroypaiement'])->name('enfant.destroypaiement');
 Route::put('/paiements/{paiement}', [EnfantController::class, 'updatepaiement'])->name('paiement.update');
@@ -57,3 +57,15 @@ Route::put('/paiements/{paiement}', [EnfantController::class, 'updatepaiement'])
 Route::get('/paiementList', [EnfantController::class, 'paiementList'])->name('enfant.paiement.list');
 Route::post('/paiement', [EnfantController::class, 'storePaiement'])->name('enfant.paiement.submit');
 Route::get('/enfant/{enfant}/paiement/pdf/{year}', [EnfantController::class, 'generatePdf'])->name('enfant.paiement.pdf');
+
+
+
+
+Route::get('/paiementmois', [EnfantController::class, 'showPaiementmoisView'])->name('enfant.paiementmois');
+Route::get('/paiementmois/{paiement}/edit', [EnfantController::class, 'editpaiementmois'])->name('enfant.editpaiementmois');
+Route::delete('/destroypaiementmois/{paiement}', [EnfantController::class, 'destroypaiementmois'])->name('enfant.destroypaiementmois');
+Route::put('/paiementmois/{paiement}', [EnfantController::class, 'updatepaiementmois'])->name('paiementmois.update');
+
+Route::get('/paiementmoisList', [EnfantController::class, 'paiementmoisList'])->name('enfant.paiementmois.list');
+Route::post('/paiementmois', [EnfantController::class, 'storepaiementmois'])->name('enfant.paiementmois.submit');
+Route::get('/enfant/{enfant}/paiementmois/pdf/{year}', [EnfantController::class, 'generatePdfpaiementmois'])->name('enfant.paiementmois.pdf');

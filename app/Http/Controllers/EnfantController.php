@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Enfant;
 use App\Models\Presence;
 use App\Models\PaiementAssurence;
+use App\Models\PaiementMoi;
+
+use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon; // Import Carbon for date manipulation
 use Dompdf\Dompdf;
@@ -111,7 +114,16 @@ class EnfantController extends Controller
         return view('enfant.paiement', compact('enfants'));
     }
 
+//////////////////////
 
+public function showPaiementmoisView(Enfant $enfant)
+{
+    $enfants = Enfant::all();
+
+    return view('enfant.paiementmois', compact('enfants'));
+}
+
+/////////////////////////////////////////////////////////////////////
     public function storePaiement(Request $request)
     {
         // Validate the incoming request data
@@ -135,7 +147,35 @@ class EnfantController extends Controller
         // Redirect the user to a relevant page, such as the view for the created paiement
         return redirect()->route('enfant.paiement.list') ->with('success', 'Paiement créer avec succès.');
     }
+/////////////////////////////////
 
+
+public function storepaiementmois(Request $request)
+{
+    // Validate the incoming request data
+    $request->validate([
+        'enfant_id' => 'required|exists:enfants,id',
+        'date' => 'required|date',
+        'valeur' => 'required|integer',
+        'mois' => 'required|string',
+
+    ]);
+
+    // Create a new instance of PaiementAssurence model
+    $paiement = new PaiementMoi();
+    $paiement->enfant_id = $request->enfant_id;
+    $paiement->date = $request->date;
+    $paiement->valeur = $request->valeur; 
+    $paiement->mois = $request->mois;
+
+    // Save the PaiementAssurence instance
+    $paiement->save();
+
+    // Redirect the user to a relevant page, such as the view for the created paiement
+    return redirect()->route('enfant.paiementmois.list') ->with('success', 'Paiement créer avec succès.');
+}
+
+/////////////////////
 
     public function destroypaiement(PaiementAssurence $paiement)
     {
@@ -144,6 +184,16 @@ class EnfantController extends Controller
 
         // Redirect the user to a relevant page, such as the index page for paiements
         return redirect()->route('enfant.paiement.list')
+            ->with('success', 'Paiement supprimée avec succès.');
+    }
+
+    public function destroypaiementmois(PaiementMoi $paiement)
+    {
+        // Delete the paiement
+        $paiement->delete();
+
+        // Redirect the user to a relevant page, such as the index page for paiements
+        return redirect()->route('enfant.paiementmois.list')
             ->with('success', 'Paiement supprimée avec succès.');
     }
     
@@ -166,6 +216,23 @@ class EnfantController extends Controller
     }
     
 
+    ///////////////////
+    public function paiementmoisList()
+    {
+        // Fetch all paiements with associated enfant details
+        $paiements = PaiementMoi::with('enfant')
+            ->orderByRaw("FIELD(mois, 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre')")
+            ->orderBy('mois', 'desc')
+            ->get()
+            ->groupBy('mois');
+        
+        // Pass the paiements data to the view
+        return view('enfant.listpaiementmois', [
+            'paiements' => $paiements,
+        ]);
+    }
+    
+    
   
     public function editpaiement(PaiementAssurence $paiement)
     {
@@ -176,6 +243,15 @@ class EnfantController extends Controller
         return view('enfant.editpaiement', compact('paiement', 'enfants'));
     }
     
+
+    public function editpaiementmois(PaiementMoi $paiement)
+    {
+        // Fetch all enfants to populate the select dropdown in the edit form
+        $enfants = Enfant::all();
+    
+        // Return the edit view with the paiement data and enfants data
+        return view('enfant.editpaiementmois', compact('paiement', 'enfants'));
+    }
 
 
     public function updatepaiement(Request $request, PaiementAssurence $paiement)
@@ -195,6 +271,33 @@ class EnfantController extends Controller
         return redirect()->route('enfant.paiement.list')
             ->with('success', 'Paiement updated successfully.');
     }
+
+    //////////////////////////////////////
+
+
+
+    public function updatepaiementmois(Request $request, PaiementMoi $paiement)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'enfant_id' => 'required|exists:enfants,id',
+            'date' => 'required|date',
+            'valeur' => 'required|integer',
+            'annee' => 'required|string|max:4|min:4',
+            'mois' => 'required|string',
+
+        ]);
+
+        // Update the paiement with the validated data
+        $paiement->update($request->all());
+
+        // Redirect the user to a relevant page, such as the index page for paiements
+        return redirect()->route('enfant.paiementmois.list')
+            ->with('success', 'Paiement updated successfully.');
+    }
+
+
+    ///////////////////
 //blade presence create
 
 public function showPresenceView()
@@ -245,6 +348,8 @@ public function showPresenceView()
             'enfants' => 'required|array',
             'presence_status' => 'required|array',
         ]);
+        // dd($request->all());
+
     
         $date = $request->input('date');
         $enfants = $request->input('enfants');
@@ -276,6 +381,8 @@ public function showPresenceView()
                 'presence' => $presenceStatus[$enfantId], // Use enfant ID as key to retrieve presence status
             ]);
         }
+        
+        
     
         // Redirect back or return a response as needed
         return redirect()->route('enfant.presence.list')->with('success', 'Présence mise à jour avec succès');

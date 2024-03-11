@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('paiement_assurences', function (Blueprint $table) {
-            $table->unsignedBigInteger('enfant_id');
+        Schema::table('paiement_mois', function (Blueprint $table) {
+        $table->unsignedBigInteger('enfant_id');
 
             $table->foreign('enfant_id')
                   ->references('id')
@@ -30,9 +30,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('paiement_assurences', function (Blueprint $table) {
-                $table->dropForeign(['enfant_id']);
-                $table->dropColumn('enfant_id');
-            });       
+        Schema::table('paiement_mois', function (Blueprint $table) {
+            $table->dropForeign(['enfant_id']);
+            $table->dropColumn('enfant_id');   
+             });
     }
 };

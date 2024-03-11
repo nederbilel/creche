@@ -106,8 +106,8 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="#">Consulter</a>
-                                            <a class="nav-link" href="#">Nouveau Paiement</a>
+                                            <a class="nav-link" href="/paiementmoisList">Consulter</a>
+                                            <a class="nav-link" href="/paiementmois">Nouveau Paiement</a>
                                         </nav>
                                     </div>
                                 </nav>
@@ -121,10 +121,10 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Liste de Présence
                             </a>
-                            <a class="nav-link" href="#">
+                            {{-- <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 
-                            </a>
+                            </a> --}}
 
                             
                         </div>

@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('paiement_assurence', function (Blueprint $table) {
+        Schema::create('paiement_assurences', function (Blueprint $table) {
             $table->id();
             $table->date('date');
             $table->integer('valeur'); 
@@ -30,7 +30,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paiement_assurence');
+        Schema::dropIfExists('paiement_assurences');
     }
 };
 
