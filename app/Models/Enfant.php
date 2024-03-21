@@ -22,5 +22,6 @@ class Enfant extends Model
         'adresse',
         'maladie',
         'description',
+        'picture_path',
     ];
 }

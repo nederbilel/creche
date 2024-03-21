@@ -13,7 +13,7 @@
 @endif
     <div class="row justify-content-center">
         <div class="col-md-10">
-            <h1>Nouvel Paiement Assurence</h1>
+            <h1>Nouvel Paiement </h1>
             <form action="{{ route('enfant.paiementmois.submit') }}" method="POST">
                 @csrf
                 <div class="form-group">
@@ -25,7 +25,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="date">Date:</label>
+                    <label for="date">Date de paiement:</label>
                     <input type="date" name="date" class="form-control">
                 </div>
                 <div class="form-group">

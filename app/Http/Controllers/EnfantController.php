@@ -30,9 +30,37 @@ class EnfantController extends Controller
             'vaccin' => 'required|string|max:255',
             'adresse' => 'required|string|max:255',
             'maladie' => 'required|string|max:255',
-            'description' => 'required|string',
+            'picture' => 'nullable|max:2048', // Assuming maximum file size is 2MB, adjust as needed
         ]);
     
+        // Handle picture upload
+        if ($request->hasFile('picture')) {
+            // Store the uploaded picture in a public folder
+            $path = $request->file('picture')->store('enfants', 'public');
+    
+            // Merge the picture path into the request data
+            $request->merge(['picture_path' => $path]);
+        }
+    
+        // Concatenate the selected authorizations into the description
+        $description = '';
+    
+        if ($request->has('autorisation_hospitalise')) {
+            $description .= 'Autorisation d\'hospitalisé. ';
+        }
+    
+        if ($request->has('autorisation_publier')) {
+            $description .= 'Autorisation de publier ces photos en social media. ';
+        }
+    
+        if ($request->has('autorisation_sortie')) {
+            $description .= 'Autorisation de sortie en plein air. ';
+        }
+    
+        // Add the description to the request data
+        $request->merge(['description' => $description]);
+    
+        // Create and save the Enfant model
         $enfant = new Enfant();
         $enfant->fill($request->all());
         $enfant->save();
@@ -85,13 +113,43 @@ class EnfantController extends Controller
             'vaccin' => 'required|string|max:255',
             'adresse' => 'required|string|max:255',
             'maladie' => 'required|string|max:255',
-            'description' => 'required|string',
+            'picture' => 'nullable|image|max:2048', // Adjust maximum file size as needed
         ]);
-
+    
+        // Handle picture upload
+        if ($request->hasFile('picture')) {
+            // Store the uploaded picture in a public folder
+            $path = $request->file('picture')->store('enfants', 'public');
+    
+            // Merge the picture path into the request data
+            $request->merge(['picture_path' => $path]);
+        }
+    
+        // Concatenate the selected authorizations into the description
+        $description = '';
+    
+        if ($request->has('autorisation_hospitalise')) {
+            $description .= 'Autorisation d\'hospitalisé. ';
+        }
+    
+        if ($request->has('autorisation_publier')) {
+            $description .= 'Autorisation de publier ces photos en social media. ';
+        }
+    
+        if ($request->has('autorisation_sortie')) {
+            $description .= 'Autorisation de sortie en plein air. ';
+        }
+    
+        // Add the description to the request data
+        $request->merge(['description' => $description]);
+    
+        // Update the Enfant model
         $enfant->update($request->all());
-
+    
         return redirect()->route('indexenfant')->with('success', 'Enfant modifié avec succès');
     }
+    
+    
 
     // Function to remove the specified Enfant
     public function destroy(Enfant $enfant)
