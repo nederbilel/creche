@@ -8,15 +8,58 @@
         <meta name="author" content="neder" />
         <title>PTIBOO</title>
         <link rel="icon" type="image/x-icon" href="/img/creche.jpg" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0/css/bootstrap.min.css" rel="stylesheet">
 
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="/css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="/css/bootstrap.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+
+        {{-- <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script> --}}
+      <style>
+        /* Apply the Roboto font to the body */
+/* Apply the Open Sans font to the body */
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* You can also apply the font to specific elements */
+h1, h2, h3 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+      </style>
+      <style>
+        .custom-input {
+        border: none;
+        border-radius: 10px;
+        background-color: #f0f0f0;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .custom-button {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-weight: bold;
+        color: white;
+        background-color: #368062;
+        transition: background-color 0.3s ease;
+    }
+    
+    .custom-button:hover {
+        background-color: #2c6f4a;
+    }
+    
+    </style>
     </head>
     <body class="sb-nav-fixed">
+      
         <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #368062;">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Crèche  PTIBOO</a>
+            <a class="navbar-brand ps-3" href="/home">Crèche  PTIBOO</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->

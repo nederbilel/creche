@@ -1,7 +1,18 @@
 @extends('enfant.app')
 
 @section('content')
+
+
+<nav aria-label="breadcrumb" >
+    <ol class="breadcrumb" style="background-color: #ffffff">
+        <li class="breadcrumb-item" > <a href="/home" style="color :#368062">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">List d'enfants</a></li>
+    </ol>
+</nav>
+
+
 <div class="container">
+ 
     <div class="row justify-content-center">
         <div class="col-md-10">
             <h1 class="mb-4">Liste des Enfants</h1>

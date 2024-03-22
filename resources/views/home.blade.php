@@ -1,9 +1,15 @@
 @extends('enfant.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <nav aria-label="breadcrumb" >
+        <ol class="breadcrumb" style="background-color: #ffffff">
+            <li class="breadcrumb-item active" aria-current="page">Home</a></li>
+            
+        </ol>
+    </nav>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
 
                 <div class="card-body">
                     @if (session('status'))
@@ -11,10 +17,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-<h1>                   admin dashboard
-</h1>
                 </div>
  
+            </div>
+        </div>
     </div>
-</div>
 @endsection
