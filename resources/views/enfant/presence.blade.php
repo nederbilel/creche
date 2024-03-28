@@ -1,8 +1,6 @@
 @extends('enfant.app')
 
 @section('content')
-
-<div class="container">
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -12,8 +10,20 @@
         </ul>
     </div>
 @endif
+
+<nav aria-label="breadcrumb" >
+    <ol class="breadcrumb" style="background-color: #ffffff">
+        <li class="breadcrumb-item" > <a href="/home" style="color :#368062">Home</a></li>
+        <li class="breadcrumb-item"><a href="/presenceList" style="color :#368062">Liste de présence</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Carte de Présence</a></li>
+    </ol>
+</nav>
+
+
+<div class="container">
+
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h1 class="mt-5 mb-4">Carte de Présence pour Enfants</h1>
             <form action="{{ route('enfant.presence') }}" method="post">
                 @csrf

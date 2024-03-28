@@ -3,6 +3,17 @@
 @section('content')
 
 
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
+@if (session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif
 <nav aria-label="breadcrumb" >
     <ol class="breadcrumb" style="background-color: #ffffff">
         <li class="breadcrumb-item" > <a href="/home" style="color :#368062">Home</a></li>
@@ -14,21 +25,10 @@
 <div class="container">
  
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-12">
             <h1 class="mb-4">Liste des Enfants</h1>
             <a class="btn btn-success mb-3" href="{{ route('enfants.create') }}">Ajouter un Enfant</a>
 
-            @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-            @endif
-
-            @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-            @endif
 
             <ul class="list-group">
                 @foreach ($enfants as $enfant)

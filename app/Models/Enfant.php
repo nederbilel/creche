@@ -24,4 +24,5 @@ class Enfant extends Model
         'description',
         'picture_path',
     ];
+
 }

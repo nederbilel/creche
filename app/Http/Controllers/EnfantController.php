@@ -216,6 +216,8 @@ public function storepaiementmois(Request $request)
         'date' => 'required|date',
         'valeur' => 'required|integer',
         'mois' => 'required|string',
+        'annee' => 'required|string|min:4|max:4',
+
 
     ]);
 
@@ -225,6 +227,8 @@ public function storepaiementmois(Request $request)
     $paiement->date = $request->date;
     $paiement->valeur = $request->valeur; 
     $paiement->mois = $request->mois;
+    $paiement->annee = $request->annee;
+
 
     // Save the PaiementAssurence instance
     $paiement->save();
@@ -259,34 +263,80 @@ public function storepaiementmois(Request $request)
     //liste des paiement
    
 
-    public function paiementList()
-    {
-        // Fetch all paiements with associated enfant details
-        $paiements = PaiementAssurence::with('enfant')->get();
+    // public function paiementList(Request $request)
+    // {
+    //     $selectedYear = $request->input('year', null);
     
-        // Group paiements by 'annee'
-        $groupedPaiements = $paiements->groupBy('annee');
+    //     $paiementsQuery = PaiementAssurance::with('enfant');
     
-        $enfants = Enfant::all();
+    //     if ($selectedYear) {
+    //         $paiementsQuery->where('annee', $selectedYear);
+    //     }
     
-        // Pass the grouped paiements data to the view
-        return view('enfant.listpaiement', ['groupedPaiements' => $groupedPaiements, 'enfants' => $enfants]);
+    //     $paiements = $paiementsQuery->get();
+    
+    //     $enfants = Enfant::all();
+    
+    //     return view('enfant.listpaiement', [
+    //         'paiements' => $paiements,
+    //         'enfants' => $enfants,
+    //         'selectedYear' => $selectedYear,
+    //     ]);
+    // }
+   
+
+    public function paiementList(Request $request)
+{
+    $selectedYear = $request->input('year', null);
+
+    $paiementsQuery = PaiementAssurence::with('enfant');
+
+    if ($selectedYear) {
+        $paiementsQuery->where('annee', $selectedYear);
     }
-    
+
+    $paiements = $paiementsQuery->get();
+
+    $enfants = Enfant::all();
+
+    $years = PaiementAssurence::distinct()->pluck('annee')->toArray();
+
+    return view('enfant.listpaiement', [
+        'paiements' => $paiements,
+        'enfants' => $enfants,
+        'years' => $years,
+        'selectedYear' => $selectedYear,
+    ]);
+}
 
     ///////////////////
-    public function paiementmoisList()
+    public function paiementmoisList(Request $request)
     {
         // Fetch all paiements with associated enfant details
-        $paiements = PaiementMoi::with('enfant')
-            ->orderByRaw("FIELD(mois, 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre')")
-            ->orderBy('mois', 'desc')
-            ->get()
-            ->groupBy('mois');
-        
-        // Pass the paiements data to the view
+        $paiementsQuery = PaiementMoi::with('enfant')
+            ->orderBy('annee', 'desc')
+            ->orderByRaw("FIELD(mois, 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre')");
+    
+        // Check if a year filter is applied
+        if ($request->filled('year')) {
+            $paiementsQuery->where('annee', $request->year);
+        }
+    
+        // Check if a month filter is applied
+        if ($request->filled('month')) {
+            $paiementsQuery->where('mois', $request->month);
+        }
+    
+        // Execute the query
+        $paiements = $paiementsQuery->get()->groupBy(['annee', 'mois']);
+    
+        // Get unique years
+        $years = PaiementMoi::distinct()->pluck('annee')->toArray();
+    
+        // Pass the paiements data, years, and the selected year to the view
         return view('enfant.listpaiementmois', [
             'paiements' => $paiements,
+            'years' => $years,
         ]);
     }
     

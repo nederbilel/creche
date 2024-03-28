@@ -1,16 +1,31 @@
 @extends('enfant.app')
 
 @section('content')
-<div class="container">
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+
+
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb" style="background-color: #ffffff">
+    <li class="breadcrumb-item"><a href="/home" style="color :#368062">Home</a></li>
+    <li class="breadcrumb-item"><a href="/paiementmoisList" style="color :#368062">Paiement Mensuel</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Modifier paiement</li>
+</ol>
+</nav>
+
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
+
+<div class="container">
+
+    
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

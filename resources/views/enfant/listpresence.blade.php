@@ -1,15 +1,24 @@
 @extends('enfant.app')
 
-@section('content')
-<div class="container">
-    @if (session('success'))
+@section('content')  
+  @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
     @endif
 
+    <nav aria-label="breadcrumb" >
+        <ol class="breadcrumb" style="background-color: #ffffff">
+            <li class="breadcrumb-item" > <a href="/home" style="color :#368062">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Liste de présence</a></li>
+        </ol>
+    </nav>
+    
+
+<div class="container">
+
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h1 class="mt-5 mb-4">Liste de présence</h1>
             <div class="mb-4">
                 <form action="{{ route('enfant.presence.list') }}" method="get" class="form-inline">
@@ -44,10 +53,11 @@
                         </div>
                     </div>
                 </form>
-                <div class="col-auto">
-                    <a href="{{ route('enfant.presence.pdf', ['enfant' => $enfantId, 'year' => $year, 'month' => $month]) }}" class="btn btn-success btn-sm" target="_blank">Imprimer</a>
-                </div>
+               
                 
+            </div>
+            <div class="col-auto">
+                <a href="{{ route('enfant.presence.pdf', ['enfant' => $enfantId, 'year' => $year, 'month' => $month]) }}" class="btn btn-success btn-sm" target="_blank">Imprimer</a>
             </div>
             <div class="calendar">
                 <div class="row">
