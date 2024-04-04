@@ -23,6 +23,7 @@ class Enfant extends Model
         'maladie',
         'description',
         'picture_path',
+        'frais_inscription',
     ];
 
 }

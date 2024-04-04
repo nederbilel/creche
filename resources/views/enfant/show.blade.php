@@ -1,61 +1,115 @@
 @extends('enfant.app')
 
 @section('content')
-<nav aria-label="breadcrumb" >
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
+<nav aria-label="breadcrumb">
     <ol class="breadcrumb" style="background-color: #ffffff">
-        <li class="breadcrumb-item" > <a href="/home" style="color :#368062">Home</a></li>
-        <li class="breadcrumb-item"><a href="/enfants" style="color :#368062">List d'enfants</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Details enfant</li>
+        <li class="breadcrumb-item"><a href="/home" style="color :#2e90d6">Home</a></li>
+        <li class="breadcrumb-item"><a href="/enfants" style="color :#2e90d6">List d'enfants</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Nouveau enfant</li>
     </ol>
 </nav>
-<div class="container-fluid">
+
+<div class="container">
     <div class="row justify-content-center">
-     
-        <div class="col-lg-12">
-          
-            
-            <div class="card">
-                <div class="card-header">
-                    <h1 class="card-title">Profil de l'Enfant</h1>
-                </div>
-                <div class="card-body">
+        <div class="col-md-12">
+            <form method="POST" action="{{ route('enfants.store') }}" enctype="multipart/form-data">
+                @csrf
+
+                <!-- Information Enfant -->
+                <div class="mb-4">
+                    <h4 class="text-decoration-underline fst-italic">Information Enfant</h4>
+
                     <div class="row">
-                        <div class="col-lg-4">
-                            <div class="text-center" style="margin-top: 50px">
-                                @if($enfant->picture_path)
-                                <img src="{{ asset('storage/' . $enfant->picture_path) }}" alt="Enfant's Picture" style="border-radius: 50%; width: 200px; height: 200px;" class="img-fluid">
-                                @endif
-                            </div>
+                        <div class="col-md-4 mb-3">
+                            {{-- <label for="picture" class="form-label">Photo Enfant</label> --}}
+                            <img src="{{ asset('storage/' . $enfant->picture_path) }}" alt="Enfant's Picture" style="width: 75px; height: 75px; border-radius: 50%;">
                         </div>
-                        <div class="col-lg-8">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <h2 class="mt-4">Information Enfant</h2>
-                                    <ul class="list-group">
-                                        <li class="list-group-item"><strong>Nom:</strong> {{ $enfant->nom }}</li>
-                                        <li class="list-group-item"><strong>Date de Naissance:</strong> {{ $enfant->date_de_naissance }}</li>
-                                        <li class="list-group-item"><strong>Vaccin:</strong> {{ $enfant->vaccin }}</li>
-                                        <li class="list-group-item"><strong>Maladie:</strong> {{ $enfant->maladie }}</li>
-                                        <li class="list-group-item"><strong>Description:</strong> {{ $enfant->description }}</li>
-                                    </ul>
-                                </div>
-                                <div class="col-lg-6">
-                                    <h2 class="mt-4">Information Parents</h2>
-                                    <ul class="list-group">
-                                        <li class="list-group-item"><strong>Nom de la Mère:</strong> {{ $enfant->nom_mere }}</li>
-                                        <li class="list-group-item"><strong>Nom du Père:</strong> {{ $enfant->nom_pere }}</li>
-                                        <li class="list-group-item"><strong>Téléphone 1:</strong> {{ $enfant->telephone1 }}</li>
-                                        <li class="list-group-item"><strong>Téléphone 2:</strong> {{ $enfant->telephone2 }}</li>
-                                        <li class="list-group-item"><strong>Travail du Père:</strong> {{ $enfant->travail_pere }}</li>
-                                        <li class="list-group-item"><strong>Travail de la Mère:</strong> {{ $enfant->travail_mere }}</li>
-                                        <li class="list-group-item"><strong>Adresse:</strong> {{ $enfant->adresse }}</li>
-                                    </ul>
-                                </div>
-                            </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="nom" class="form-label">Nom</label>
+                            <p>{{ $enfant->nom }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="maladie" class="form-label">Maladie</label>
+                            <p>{{ $enfant->maladie }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label for="date_de_naissance" class="form-label">Date de Naissance</label>
+                            <p>{{ $enfant->date_de_naissance }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label for="vaccin" class="form-label">Vaccin</label>
+                            <p>{{ $enfant->vaccin }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="adresse" class="form-label">Adresse</label>
+                            <p>{{ $enfant->adresse }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="avec_gouter" class="form-label">Description</label>
+                            <p>{{ $enfant->description }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="frais_inscription" class="form-label">Frais d'inscription</label>
+                            <p>{{ $enfant->frais_inscription }}</p>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <!-- Information Parents -->
+                <hr>
+                <div class="mb-4">
+                    <h4 class="text-decoration-underline fst-italic">Information Parents</h4>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="nom_mere" class="form-label">Nom de la Mère</label>
+                            <p>{{ $enfant->nom_mere }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="telephone1" class="form-label">Téléphone de la mère</label>
+                            <p>{{ $enfant->telephone1 }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="travail_mere" class="form-label">Travail de la Mère</label>
+                            <p>{{ $enfant->travail_mere }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="nom_pere" class="form-label">Nom du Père</label>
+                            <p>{{ $enfant->nom_pere }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="telephone2" class="form-label">Téléphone du Père</label>
+                            <p>{{ $enfant->telephone2 }}</p>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="travail_pere" class="form-label">Travail du Père</label>
+                            <p>{{ $enfant->travail_pere }}</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

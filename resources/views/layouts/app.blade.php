@@ -73,9 +73,10 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main style="background-image: url('/img/creche.jpg'); background-size: cover; height:1080px;">
             @yield('content')
         </main>
+        
     </div>
 </body>
 </html>

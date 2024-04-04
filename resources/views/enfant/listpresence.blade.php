@@ -9,7 +9,7 @@
 
     <nav aria-label="breadcrumb" >
         <ol class="breadcrumb" style="background-color: #ffffff">
-            <li class="breadcrumb-item" > <a href="/home" style="color :#368062">Home</a></li>
+            <li class="breadcrumb-item" > <a href="/home" style="color :#2e90d6">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Liste de présence</a></li>
         </ol>
     </nav>

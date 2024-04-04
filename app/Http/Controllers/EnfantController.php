@@ -30,7 +30,9 @@ class EnfantController extends Controller
             'vaccin' => 'required|string|max:255',
             'adresse' => 'required|string|max:255',
             'maladie' => 'required|string|max:255',
-            'picture' => 'nullable|max:2048', // Assuming maximum file size is 2MB, adjust as needed
+            'picture' => 'nullable|max:2048', 
+            'frais_inscription' => 'required|string|max:255', 
+
         ]);
     
         // Handle picture upload
@@ -45,16 +47,19 @@ class EnfantController extends Controller
         // Concatenate the selected authorizations into the description
         $description = '';
     
-        if ($request->has('autorisation_hospitalise')) {
-            $description .= 'Autorisation d\'hospitalisé. ';
+        if ($request->has('avec_gouter')) {
+            $description .= 'Avec Goûter. ';
+
+        } if ($request->has('sans_gouter')) {
+            $description .= 'Sans Goûter. ';
         }
     
-        if ($request->has('autorisation_publier')) {
-            $description .= 'Autorisation de publier ces photos en social media. ';
+        if ($request->has('Demi-journée')) {
+            $description .= 'Demi-journée ';
         }
     
-        if ($request->has('autorisation_sortie')) {
-            $description .= 'Autorisation de sortie en plein air. ';
+        if ($request->has('toute_journee')) {
+            $description .= 'Toute la journée ';
         }
     
         // Add the description to the request data
@@ -113,7 +118,9 @@ class EnfantController extends Controller
             'vaccin' => 'required|string|max:255',
             'adresse' => 'required|string|max:255',
             'maladie' => 'required|string|max:255',
-            'picture' => 'nullable|image|max:2048', // Adjust maximum file size as needed
+            'picture' => 'nullable|image|max:2048', 
+            'frais_inscription' => 'required|string|max:255', 
+
         ]);
     
         // Handle picture upload
@@ -128,18 +135,20 @@ class EnfantController extends Controller
         // Concatenate the selected authorizations into the description
         $description = '';
     
-        if ($request->has('autorisation_hospitalise')) {
-            $description .= 'Autorisation d\'hospitalisé. ';
+        if ($request->has('avec_gouter')) {
+            $description .= 'Avec Goûter. ';
         }
     
-        if ($request->has('autorisation_publier')) {
-            $description .= 'Autorisation de publier ces photos en social media. ';
+        if ($request->has('Demi-journée')) {
+            $description .= 'Demi-journée ';
+        }
+        if ($request->has('sans_gouter')) {
+            $description .= 'Sans Goûter. ';
         }
     
-        if ($request->has('autorisation_sortie')) {
-            $description .= 'Autorisation de sortie en plein air. ';
+        if ($request->has('toute_journee')) {
+            $description .= 'Toute la journée ';
         }
-    
         // Add the description to the request data
         $request->merge(['description' => $description]);
     

@@ -13,8 +13,8 @@
 
 <nav aria-label="breadcrumb" >
     <ol class="breadcrumb" style="background-color: #ffffff">
-        <li class="breadcrumb-item" > <a href="/home" style="color :#368062">Home</a></li>
-        <li class="breadcrumb-item"><a href="/enfants" style="color :#368062">List d'enfants</a></li>
+        <li class="breadcrumb-item" > <a href="/home" style="color :#2e90d6">Home</a></li>
+        <li class="breadcrumb-item"><a href="/enfants" style="color :#2e90d6">List d'enfants</a></li>
         <li class="breadcrumb-item active" aria-current="page">Modifier enfant</li>
     </ol>
 </nav>
@@ -90,28 +90,45 @@
                     <div class="row mb-3">
                         <div class="col-sm-6">
                             <div class="form-check">
-                                <input type="checkbox" id="autorisation_hospitalise" name="autorisation_hospitalise" value="true" class="form-check-input">
-                                <label class="form-check-label" for="autorisation_hospitalise">Autorisation d'hospitalisé</label>
+                                <input type="checkbox" id="toute_journee" name="toute_journee" value="true" class="form-check-input">
+                                <label class="form-check-label" for="toute_journee">Toute la journée</label>
                             </div>
                         </div>
-
+    
                         <div class="col-sm-6">
                             <div class="form-check">
-                                <input type="checkbox" id="autorisation_publier" name="autorisation_publier" value="true" class="form-check-input">
-                                <label class="form-check-label" for="autorisation_publier">Autorisation de publier ces photos en social media</label>
+                                <input type="checkbox" id="Demi-journée" name="Demi-journée" value="true" class="form-check-input">
+                                <label class="form-check-label" for="Demi-journée">Demi-journée</label>
                             </div>
                         </div>
                     </div>
-
+    
                     <div class="row mb-3">
                         <div class="col-sm-6">
                             <div class="form-check">
-                                <input type="checkbox" id="autorisation_sortie" name="autorisation_sortie" value="true" class="form-check-input">
-                                <label class="form-check-label" for="autorisation_sortie">Autorisation de sortie en plein air</label>
+                                <input type="checkbox" id="avec_gouter" name="avec_gouter" value="true" class="form-check-input">
+                                <label class="form-check-label" for="avec_gouter">Avec Goûter</label>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-check">
+                                <input type="checkbox" id="sans_gouter" name="sans_gouter" value="true" class="form-check-input">
+                                <label class="form-check-label" for="avec_gouter">Sans Goûter</label>
+                            </div>
+                        </div>
+    
                     </div>
 
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label for="frais_inscription" class="form-label">Frais d'inscription</label>
+                            <input type="text" id="frais_inscription" name="frais_inscription" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0" >
+                            @error('frais_inscription')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                     <hr>
 
                     <h4>Information Parents</h4>
@@ -179,4 +196,37 @@
 </div>
 </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get references to the checkboxes
+        var touteJourneeCheckbox = document.getElementById('toute_journee');
+        var demiJourneeCheckbox = document.getElementById('Demi-journée');
+        var avec_gouterCheckbox = document.getElementById('avec_gouter');
+        var sans_gouterCheckbox = document.getElementById('sans_gouter');
+
+        // Add event listeners to the checkboxes
+        touteJourneeCheckbox.addEventListener('change', function() {
+            if (touteJourneeCheckbox.checked) {
+                demiJourneeCheckbox.checked = false; // Uncheck demi-journée if toute journée is checked
+            }
+        });demiJourneeCheckbox.addEventListener('change', function() {
+            if (demiJourneeCheckbox.checked) {
+                touteJourneeCheckbox.checked = false; // Uncheck demi-journée if toute journée is checked
+            }
+        });
+        sans_gouterCheckbox.addEventListener('change', function() {
+            if (sans_gouterCheckbox.checked) {
+                avec_gouterCheckbox.checked = false; // Uncheck demi-journée if toute journée is checked
+            }
+        });
+
+        avec_gouterCheckbox.addEventListener('change', function() {
+            if (avec_gouterCheckbox.checked) {
+                sans_gouterCheckbox.checked = false; // Uncheck toute journée if demi-journée is checked
+            }
+        });
+    });
+</script>
+
 @endsection
