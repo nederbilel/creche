@@ -26,6 +26,10 @@
             <form action="{{ route('enfant.presence') }}" method="post">
                 @csrf
                 <div class="form-group">
+                    <label for="date">Date :</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                </div>
+                <div class="form-group">
                     <table class="table">
                         <thead>
                             <tr>
@@ -57,10 +61,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="form-group">
-                    <label for="date">Date :</label>
-                    <input type="date" class="form-control" id="date" name="date" required>
-                </div>
+              
                 <button type="submit" class="btn btn-primary">Soumettre</button>
             </form>
         </div>

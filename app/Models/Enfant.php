@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Enfant extends Model
 {
     use HasFactory;
-
+    public function paiementmois()
+    {
+        return $this->hasMany(PaiementMoi::class);
+    }
     protected $fillable = [
         'nom',
         'date_de_naissance',

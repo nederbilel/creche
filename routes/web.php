@@ -20,7 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [EnfantController::class, 'indexx'])->name('home');
+Route::get('/enfants/count', [EnfantController::class, 'count'])->name('enfants.count');
 
 // Route for displaying the form to create a new Enfant
 Route::get('/enfants/create', [EnfantController::class, 'create'])->name('enfants.create');

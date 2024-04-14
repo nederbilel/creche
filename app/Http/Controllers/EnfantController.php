@@ -74,8 +74,38 @@ class EnfantController extends Controller
     }
     
     
+    public function indexx()
+{
+    // Get the current month
+
+    // Get all enfants
+    $enfants = Enfant::all();
+
+    // Get paiements for the current month
+    $paiementmois = PaiementMoi::all();
+
+    // Initialize an array to store the IDs of enfants who have paid
+    $paidEnfantsIds = [];
+
+    // Loop through paiements to collect paid enfants IDs
+    foreach ($paiementmois as $paiement) {
+        $paidEnfantsIds[] = $paiement->enfant_id;
+    }
+
+    // Filter enfants who haven't paid
+    $enfantsNotPaid = $enfants->reject(function ($enfant) use ($paidEnfantsIds) {
+        return in_array($enfant->id, $paidEnfantsIds);
+    });
+
+    return view('home', compact('enfantsNotPaid'));
+}
 
 
+    
+    
+    
+    
+    
     
 
     public function index()
@@ -341,11 +371,13 @@ public function storepaiementmois(Request $request)
     
         // Get unique years
         $years = PaiementMoi::distinct()->pluck('annee')->toArray();
-    
+        $enfants = Enfant::all();
+
         // Pass the paiements data, years, and the selected year to the view
         return view('enfant.listpaiementmois', [
             'paiements' => $paiements,
             'years' => $years,
+            'enfants' => $enfants,
         ]);
     }
     
