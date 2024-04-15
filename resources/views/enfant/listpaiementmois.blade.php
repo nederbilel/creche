@@ -45,15 +45,42 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="year-filter" class="form-label">Sélectionnez l'année :</label>
-                <select class="form-select" id="year-filter" onchange="filterPayments(this.value)">
-                    <option value="">Toutes les années</option>
-                    @foreach($years as $year)
-                    <option value="{{ $year }}">{{ $year }}</option>
-                    @endforeach
-                </select>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="year-filter" class="form-label">Sélectionnez l'année :</label>
+                        <select class="form-select" id="year-filter" onchange="filterPayments(this.value, document.getElementById('month-filter').value)" style="width: 50%;">
+                            <option value="">Toutes les années</option>
+                            @foreach($years as $year)
+                            <option value="{{ $year }}">{{ $year }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="month-filter" class="form-label">Sélectionnez le mois :</label>
+                        <select class="form-select" id="month-filter" onchange="filterPayments(document.getElementById('year-filter').value, this.value)" style="width: 50%;">
+                            <option value="">Tous les mois</option>
+                            <option value="Janvier">Janvier</option>
+                            <option value="Février">Février</option>
+                            <option value="Mars">Mars</option>
+                            <option value="Avril">Avril</option>
+                            <option value="Mai">Mai</option>
+                            <option value="Juin">Juin</option>
+                            <option value="Juillet">Juillet</option>
+                            <option value="Août">Août</option>
+                            <option value="Septembre">Septembre</option>
+                            <option value="Octobre">Octobre</option>
+                            <option value="Novembre">Novembre</option>
+                            <option value="Décembre">Décembre</option>
+                        </select>
+                    </div>
+                </div>
             </div>
+            
+            
 
             <div id="paiements-container">
                 @foreach($paiements as $year => $paiementsByYear)
@@ -83,6 +110,8 @@
                                     <!-- Actions buttons -->
                                     <a href="{{ route('enfant.editpaiementmois', $paiement->id) }}" class="btn btn-primary">Modifier</a>
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $paiement->id }}">Supprimer</button>
+                                    <a href="{{ route('enfant.paiement.pdf', ['enfant' => $paiement->enfant_id, 'year' => $paiement->annee, 'month' => $paiement->mois]) }}" class="btn btn-success btn-sm" target="_blank">Imprimer</a>
+
                                     <!-- Modal -->
                                     <div class="modal fade" id="deleteModal{{ $paiement->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -186,15 +215,18 @@
 @endsection
 
 <script>
-    function filterPayments(year) {
+    function filterPayments(year, month) {
         var rows = document.querySelectorAll('.year-month');
         rows.forEach(row => {
             var rowYear = row.getAttribute('data-year');
-            if (year === '' || rowYear === year) {
+            var rowMonth = row.getAttribute('data-month');
+            if ((year === '' || rowYear === year) && (month === '' || rowMonth === month)) {
                 row.style.display = 'block';
             } else {
                 row.style.display = 'none';
             }
         });
     }
+
+   
 </script>

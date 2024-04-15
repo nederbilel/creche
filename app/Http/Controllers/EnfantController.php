@@ -569,6 +569,36 @@ public function showPresenceView()
     return $dompdf->stream('liste_presence_' . $monthName . '.pdf');
 }
     
+
+
+public function generatePaiementPdf(Enfant $enfant, $year, $month)
+{
+    // Fetch paiement data for the specified month, year, and child
+    $paiements = PaiementMoi::where('enfant_id', $enfant->id)
+                            ->where('annee', $year)
+                            ->where('mois', $month)
+                            ->get();
+
+    // Generate HTML view for PDF
+    $html = view('enfant.facture_pdf', compact('paiements', 'enfant', 'year', 'month'))->render();
+
+    // Create a new Dompdf instance
+    $dompdf = new Dompdf();
+
+    // Load HTML content into Dompdf
+    $dompdf->loadHtml($html);
+
+    // Set paper size and orientation (optional)
+    $dompdf->setPaper('A5', 'landscape');
+
+    // Render PDF (optional: save to file)
+    $dompdf->render();
+
+    // Output PDF to browser
+    return $dompdf->stream('paiement_' . $enfant->nom . '_' . $month . '_' . $year . '.pdf');
+}
+
+
     
     
     

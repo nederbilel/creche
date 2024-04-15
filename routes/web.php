@@ -69,4 +69,4 @@ Route::put('/paiementmois/{paiement}', [EnfantController::class, 'updatepaiement
 
 Route::get('/paiementmoisList', [EnfantController::class, 'paiementmoisList'])->name('enfant.paiementmois.list');
 Route::post('/paiementmois', [EnfantController::class, 'storepaiementmois'])->name('enfant.paiementmois.submit');
-Route::get('/enfant/{enfant}/paiementmois/pdf/{year}', [EnfantController::class, 'generatePdfpaiementmois'])->name('enfant.paiementmois.pdf');
+Route::get('/enfant/{enfant}/paiement/pdf/{year}/{month}', [EnfantController::class, 'generatePaiementPdf'])->name('enfant.paiement.pdf');

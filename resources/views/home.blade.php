@@ -17,41 +17,50 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-chart-area me-1"></i>
-                    Enfants n'ayant pas encore payé pour ce mois
-                </div>
-                <div class="card-body">
-                    <ul>
-                        @foreach($enfantsNotPaid as $enfant)
-                            <li>{{ $enfant->nom }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+        <div class="card mb-4">
+            <i class="fas fa-chart-area me-1"></i>
             
-        </div>
-        
-        <div class="col-md-6">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-chart-area me-1"></i>
-                    Section 2
-                </div>
-                <div class="card-body">
-                    <!-- Content for section 2 goes here -->
-                </div>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Enfants n'ayant pas encore payé pour ce mois!</strong> 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+    
+            <div class="card-body">
+                <ul>
+                    @foreach($enfantsNotPaid as $enfant)
+                        <li>{{ $enfant->nom }}</li>
+                    @endforeach
+                </ul>
             </div>
         </div>
+    </div>
+    
+            
+   <style>
+    .notification {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    position: relative;
+}
+
+.notification .btn-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: #721c24;
+}
+
+   </style>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-area me-1"></i>
-                    Section 3
+                    Section 2
                 </div>
                 <div class="card-body">
                     <!-- Content for section 3 goes here -->
@@ -62,7 +71,7 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-chart-area me-1"></i>
-                    Section 4
+                    Section 3
                 </div>
                 <div class="card-body">
                     <!-- Content for section 4 goes here -->
