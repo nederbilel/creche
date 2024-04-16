@@ -1,84 +1,168 @@
 @extends('enfant.app')
 
 @section('content')
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card-body">
-                @if (session('status'))
-                <div class="alert alert-success" role="alert">
-                    {{ session('status') }}
-                </div>
-                @endif
-            </div>
-        </div>
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Tableau de bord</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Genération du rapport</a>
     </div>
-    <div class="row justify-content-center">
-        <div class="card mb-4">
-            <i class="fas fa-chart-area me-1"></i>
-            
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Enfants n'ayant pas encore payé pour ce mois!</strong> 
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-    
-            <div class="card-body">
-                <ul>
-                    @foreach($enfantsNotPaid as $enfant)
-                        <li>{{ $enfant->nom }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
-    </div>
-    
-            
-   <style>
-    .notification {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    color: #721c24;
-    padding: 1rem;
-    border-radius: 0.25rem;
-    position: relative;
-}
+   
+    <!-- Content Row -->
+    <div class="row">
 
-.notification .btn-close {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    color: #721c24;
-}
-
-   </style>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-chart-area me-1"></i>
-                    Section 2
-                </div>
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
-                    <!-- Content for section 3 goes here -->
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                dépense (mensuels)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">500 dt</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-chart-area me-1"></i>
-                    Section 3
-                </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
-                    <!-- Content for section 4 goes here -->
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                revenu (mensuels)</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalFees}} dt</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pourcentage d’enfants payés
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$percentagePaidEnfants}}%</div>
+                                </div>
+                                <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <div class="progress-bar bg-info" role="progressbar"
+                                            style="width: {{$percentagePaidEnfants}}%;" aria-valuenow="{{$percentagePaidEnfants}}"
+                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Nombre d'enfants</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$countAllEnfants}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Content Row -->
+
+    <div class="row">
+
+     
+
+        <div class="col-lg-6 mb-4">
+            <!-- Project Card Example -->
+            {{-- <div class="card shadow mb-4">
+                <div class="card-header py-3">
+               
+                            <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="small font-weight-bold">Server Migration <span
+                                    class="float-right">20%</span></h4>
+                            <div class="progress mb-4">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
+                                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h4 class="small font-weight-bold">Sales Tracking <span
+                                    class="float-right">40%</span></h4>
+                            <div class="progress mb-4">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
+                                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h4 class="small font-weight-bold">Customer Database <span
+                                    class="float-right">60%</span></h4>
+                            <div class="progress mb-4">
+                                <div class="progress-bar" role="progressbar" style="width: 60%"
+                                    aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h4 class="small font-weight-bold">Payout Details <span
+                                    class="float-right">80%</span></h4>
+                            <div class="progress mb-4">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
+                                    aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <h4 class="small font-weight-bold">Account Setup <span
+                                    class="float-right">Complete!</span></h4>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
+                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+            </div> --}}
+        </div>
+    </div>
+    
 </div>
+<div class="progress">
+    @php
+    // Get the current date
+    $currentDate = \Carbon\Carbon::now();
 
+    // Get the total number of days in the current month
+    $totalDaysInMonth = $currentDate->daysInMonth;
+
+    // Calculate the progress percentage
+    $progressPercentage = ($currentDate->day / $totalDaysInMonth) * 100;
+    @endphp
+
+    <div class="progress-bar" role="progressbar" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progressPercentage }}%"></div>
+</div>
 @endsection

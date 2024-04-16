@@ -61,8 +61,22 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="annee">Mois:</label>
-                            <input type="text" name="mois" class="form-control" value="{{ $paiement->mois }}">
+                            <label for="mois">Mois :</label>
+                            <select class="form-control" id="mois" name="mois" required  value="{{ $paiement->mois }}">
+                                <option value="">Sélectionner un mois</option>
+                                <option value="Janvier">Janvier</option>
+                                <option value="Février">Février</option>
+                                <option value="Mars">Mars</option>
+                                <option value="Avril">Avril</option>
+                                <option value="Mai">Mai</option>
+                                <option value="Juin">Juin</option>
+                                <option value="Juillet">Juillet</option>
+                                <option value="Août">Août</option>
+                                <option value="Septembre">Septembre</option>
+                                <option value="Octobre">Octobre</option>
+                                <option value="Novembre">Novembre</option>
+                                <option value="Décembre">Décembre</option>
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Modifier</button>

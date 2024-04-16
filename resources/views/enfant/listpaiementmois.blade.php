@@ -1,7 +1,23 @@
 @extends('enfant.app')
 
 @section('content')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 
+<style>
+.custom-btn {
+    /* Add your custom styles here */
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 5px 10px; /* Adjust padding for smaller buttons */
+    width: auto; /* Set width to auto for smaller buttons */
+}
+
+.custom-btn:hover {
+    /* Add hover styles if needed */
+    background-color: #e0e0e0;
+}
+
+</style>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb" style="background-color: #ffffff">
         <li class="breadcrumb-item"><a href="/home" style="color: #2e90d6">Home</a></li>
@@ -32,11 +48,11 @@
 
             <div class="row justify-content-between align-items-center mb-3">
                 <div class="col">
-                    <h1>Liste des Paiements</h1>
+                    <h1>Liste des factures</h1>
                 </div>
                 <div class="col-auto">
                     <!-- Button to trigger the modal -->
-                    <a id="ajouterPaiementMoisBtn" class="btn btn-success" href="#" style="background-color: #2e90d6;width:100px" data-toggle="modal" data-target="#ajouterPaiementMoisModal">
+                    <a id="ajouterPaiementMoisBtn" class="btn btn-success" href="#" style="background-color: #2e90d6;width:200px" data-toggle="modal" data-target="#ajouterPaiementMoisModal">nouvel paiement
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
                             <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
                             <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
@@ -93,7 +109,7 @@
                             <tr>
                                 <th scope="col">Nom Enfant</th>
                                 <th scope="col">Date de paiement</th>
-                                <th scope="col">Année</th>
+                                {{-- <th scope="col">Année</th> --}}
                                 <th scope="col">Valeur</th>
                                 <th scope="col">Actions</th>
                             </tr>
@@ -104,14 +120,22 @@
                             <tr>
                                 <td>{{ $paiement->enfant->nom }}</td>
                                 <td>{{ $paiement->date }}</td>
-                                <td>{{ $paiement->annee }}</td>
+                                {{-- <td>{{ $paiement->annee }}</td> --}}
                                 <td>{{ $paiement->valeur }}</td>
                                 <td>
-                                    <!-- Actions buttons -->
-                                    <a href="{{ route('enfant.editpaiementmois', $paiement->id) }}" class="btn btn-primary">Modifier</a>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $paiement->id }}">Supprimer</button>
-                                    <a href="{{ route('enfant.paiement.pdf', ['enfant' => $paiement->enfant_id, 'year' => $paiement->annee, 'month' => $paiement->mois]) }}" class="btn btn-success btn-sm" target="_blank">Imprimer</a>
-
+                                    <a href="{{ route('enfant.editpaiementmois', $paiement->id) }}" class="btn btn-primary custom-btn">
+                                        <i class="bi bi-pencil-fill"></i> Modifier
+                                    </a>
+                                    
+                                    <button type="button" class="btn btn-danger custom-btn" data-toggle="modal" data-target="#deleteModal{{ $paiement->id }}">
+                                        <i class="bi bi-trash-fill"></i> Supprimer
+                                    </button>
+                                    
+                                    <a href="{{ route('enfant.paiement.pdf', ['enfant' => $paiement->enfant_id, 'year' => $paiement->annee, 'month' => $paiement->mois]) }}" class="btn btn-success btn-sm custom-btn" target="_blank">
+                                        <i class="bi bi-printer-fill"></i> Imprimer
+                                    </a>
+                                    
+                                    
                                     <!-- Modal -->
                                     <div class="modal fade" id="deleteModal{{ $paiement->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -148,7 +172,6 @@
         </div>
     </div>
 </div>
-
 <!-- Modal for adding a new payment month -->
 <div class="modal fade" id="ajouterPaiementMoisModal" tabindex="-1" role="dialog" aria-labelledby="ajouterPaiementMoisModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
