@@ -38,16 +38,28 @@ public function edit($id)
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
+        // Validate the incoming request data
         $validatedData = $request->validate([
             'prix' => 'required|numeric',
             'date' => 'required|date',
             'type' => 'required|string',
+            'description' => 'nullable|string', // Added validation for description
         ]);
     
-            $depense = Depense::create($validatedData);
-            return redirect()->route('indexdepense')->with('success', 'Dépense ajouté avec succès');
-
+        // Create a new instance of the Depense model
+        $depense = new Depense();
+    
+        // Fill the model with the validated data
+        $depense->fill($validatedData);
+    
+        // Save the dépense to the database
+        $depense->save();
+    
+        // Redirect the user to the desired route with a success message
+        return redirect()->route('indexdepense')->with('success', 'Dépense ajoutée avec succès');
     }
+    
+    
     
 
   

@@ -2,6 +2,9 @@
 
 @section('content')
 <!-- Begin Page Content -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+
 <div class="container-fluid">
 
     <!-- Page Heading -->
@@ -56,7 +59,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pourcentage d’enfants payés
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pourcentage d'enfants payés ce mois
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
@@ -101,57 +104,145 @@
 
     <!-- Content Row -->
 
-    <div class="row">
-
-     
-
-        <div class="col-lg-6 mb-4">
-            <!-- Project Card Example -->
-            {{-- <div class="card shadow mb-4">
-                <div class="card-header py-3">
-               
-                            <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                        </div>
-                        <div class="card-body">
-                            <h4 class="small font-weight-bold">Server Migration <span
-                                    class="float-right">20%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h4 class="small font-weight-bold">Sales Tracking <span
-                                    class="float-right">40%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h4 class="small font-weight-bold">Customer Database <span
-                                    class="float-right">60%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar" role="progressbar" style="width: 60%"
-                                    aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h4 class="small font-weight-bold">Payout Details <span
-                                    class="float-right">80%</span></h4>
-                            <div class="progress mb-4">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                    aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h4 class="small font-weight-bold">Account Setup <span
-                                    class="float-right">Complete!</span></h4>
-                            <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                    aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
-                        </div>
-            </div> --}}
-        </div>
-    </div>
+    {{-- <button id="unpaidEnfantsBtn" type="button" class="btn btn-lg btn-danger">
+        Enfants non payés
+    </button>
     
+    <div id="unpaidEnfantsPopover" class="popover d-none">
+        <div class="arrow"></div>
+        <h3 class="popover-header">Enfants non payés</h3>
+        <div class="popover-body">
+            @foreach ($enfantsNotPaid as $item)
+                <span class="text-muted">{{ $item->nom }}</span><br>
+            @endforeach
+        </div>
+    </div> --}}
+    
+
+    <div class="row my-2">
+        <div class="col-md-6 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chLine"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 py-1">
+            <div class="card">
+                <div class="card-body">
+                    <canvas id="chDonut1"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 py-1">
+            <div class="card">
+                <div class="card-header">
+                    Enfants non payés ce mois
+                </div>
+                <div class="card-body">
+                    @if ($enfantsNotPaid->isEmpty())
+                        <p class="text-muted">Tous les enfants ont payé ce mois-ci.</p>
+                    @else
+                        <ul class="list-unstyled">
+                            @foreach ($enfantsNotPaid as $enfant)
+                                <li class="mb-2"><i class="bi bi-person mr-1"></i>{{ $enfant->nom }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+            </div>
+        </div>
+        
+
+
+        <script>
+
+var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+
+var chLine = document.getElementById("chLine");
+var chartData = {
+  labels: [ "Dim","Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+  datasets: [{
+    data: [, 6, 8, 9, 7, 6, 7],
+    backgroundColor: 'transparent',
+    borderColor: colors[0],
+    borderWidth: 3,
+    pointBackgroundColor: colors[0]
+  }]
+};
+
+if (chLine) {
+  new Chart(chLine, {
+    type: 'line',
+    data: chartData,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true 
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      },
+      legend: {
+        display: false
+      },
+      responsive: true
+    }
+  });
+}
+
+
+
+
+var donutOptions = {
+  cutoutPercentage: 85, 
+  legend: {position:'bottom', padding:5, labels: {pointStyle:'circle', usePointStyle:true}}
+};
+
+var chDonutData1 = {
+    labels: ['garçons', 'filles'],
+    datasets: [
+      {
+        backgroundColor: colors.slice(3,7),
+        borderWidth: 0,
+        data: [74, 26]
+      }
+    ]
+};
+
+var chDonut1 = document.getElementById("chDonut1");
+if (chDonut1) {
+  new Chart(chDonut1, {
+      type: 'pie',
+      data: chDonutData1,
+      options: donutOptions
+  });
+}
+
+
+
+// 
+
+
+
+
+        </script>
+    </div>
+
+
+
+
+
+
+
 </div>
-<div class="progress" style="margin-top:390px">
+<div class="progress" style="margin-top:75px">
     @php
     // Get the current date
     $currentDate = \Carbon\Carbon::now();
@@ -165,4 +256,5 @@
 
     <div class="progress-bar" role="progressbar" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progressPercentage }}%"></div>
 </div>
+
 @endsection

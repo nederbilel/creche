@@ -79,18 +79,18 @@
                         <label for="month-filter" class="form-label">Sélectionnez le mois :</label>
                         <select class="form-select" id="month-filter" onchange="filterPayments(document.getElementById('year-filter').value, this.value)" style="width: 50%;">
                             <option value="">Tous les mois</option>
-                            <option value="Janvier">Janvier</option>
-                            <option value="Février">Février</option>
-                            <option value="Mars">Mars</option>
-                            <option value="Avril">Avril</option>
-                            <option value="Mai">Mai</option>
-                            <option value="Juin">Juin</option>
-                            <option value="Juillet">Juillet</option>
-                            <option value="Août">Août</option>
-                            <option value="Septembre">Septembre</option>
-                            <option value="Octobre">Octobre</option>
-                            <option value="Novembre">Novembre</option>
-                            <option value="Décembre">Décembre</option>
+                            <option value="01">Janvier</option>
+                            <option value="02">Février</option>
+                            <option value="03">Mars</option>
+                            <option value="04">Avril</option>
+                            <option value="05">Mai</option>
+                            <option value="06">Juin</option>
+                            <option value="07">Juillet</option>
+                            <option value="08">Août</option>
+                            <option value="09">Septembre</option>
+                            <option value="10">Octobre</option>
+                            <option value="11">Novembre</option>
+                            <option value="12">Décembre</option>
                         </select>
                     </div>
                 </div>
@@ -243,13 +243,35 @@
         rows.forEach(row => {
             var rowYear = row.getAttribute('data-year');
             var rowMonth = row.getAttribute('data-month');
-            if ((year === '' || rowYear === year) && (month === '' || rowMonth === month)) {
+            // If both year and month are selected, compare them as numbers
+            if (year !== '' && month !== '') {
+                if (parseInt(rowYear) === parseInt(year) && parseInt(rowMonth) === parseInt(month)) {
+                    row.style.display = 'block';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+            // If only year is selected, filter by year
+            else if (year !== '' && month === '') {
+                if (parseInt(rowYear) === parseInt(year)) {
+                    row.style.display = 'block';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+            // If only month is selected, filter by month
+            else if (year === '' && month !== '') {
+                if (parseInt(rowMonth) === parseInt(month)) {
+                    row.style.display = 'block';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+            // If no filters are selected, display all rows
+            else {
                 row.style.display = 'block';
-            } else {
-                row.style.display = 'none';
             }
         });
     }
-
-   
 </script>
+

@@ -64,18 +64,18 @@
                             <label for="mois">Mois :</label>
                             <select class="form-control" id="mois" name="mois" required  value="{{ $paiement->mois }}">
                                 <option value="">Sélectionner un mois</option>
-                                <option value="Janvier">Janvier</option>
-                                <option value="Février">Février</option>
-                                <option value="Mars">Mars</option>
-                                <option value="Avril">Avril</option>
-                                <option value="Mai">Mai</option>
-                                <option value="Juin">Juin</option>
-                                <option value="Juillet">Juillet</option>
-                                <option value="Août">Août</option>
-                                <option value="Septembre">Septembre</option>
-                                <option value="Octobre">Octobre</option>
-                                <option value="Novembre">Novembre</option>
-                                <option value="Décembre">Décembre</option>
+                                <option value="01">Janvier</option>
+                                <option value="02">Février</option>
+                                <option value="03">Mars</option>
+                                <option value="04">Avril</option>
+                                <option value="05">Mai</option>
+                                <option value="06">Juin</option>
+                                <option value="07">Juillet</option>
+                                <option value="08">Août</option>
+                                <option value="09">Septembre</option>
+                                <option value="10">Octobre</option>
+                                <option value="11">Novembre</option>
+                                <option value="12">Décembre</option>
                             </select>
                         </div>
 

@@ -77,52 +77,57 @@ class EnfantController extends Controller
     
 
     public function indexx()
-{
-    // Get the current month
-    $currentMonth = Carbon::now()->format('m');
-    
-    // Get all enfants
-    $enfants = Enfant::all();
-    
-    // Get paiements for the current month
-// Get paiements for the current month
-$paiementmois = PaiementMoi::where('mois', $currentMonth)->get();
-// dd($paiementmois);
-
-    
-    // Initialize an array to store the IDs of enfants who have paid
-    $paidEnfantsIds = [];
-    
-    // Loop through paiements to collect paid enfants IDs
-    foreach ($paiementmois as $paiement) {
-        $paidEnfantsIds[] = $paiement->enfant_id;
+    {
+        // Get the current month and year
+        $currentMonth = Carbon::now()->format('m');
+        $currentYear = Carbon::now()->format('Y');
+        
+        // Get all enfants
+        $enfants = Enfant::all();
+        
+        // Get paiements for the current month and year
+        $paiementmois = PaiementMoi::where('mois', $currentMonth)
+                                    ->where('annee', $currentYear)
+                                    ->get();
+        
+        // Initialize an array to store the IDs of enfants who have paid
+        $paidEnfantsIds = [];
+        
+        // Loop through paiements to collect paid enfants IDs
+        foreach ($paiementmois as $paiement) {
+            $paidEnfantsIds[] = $paiement->enfant_id;
+        }
+        
+        // Filter enfants who haven't paid for the current month and year
+        $enfantsNotPaid = $enfants->reject(function ($enfant) use ($paidEnfantsIds) {
+            return in_array($enfant->id, $paidEnfantsIds);
+        });
+        
+        // Count the number of all enfants
+        $countAllEnfants = $enfants->count();
+        
+        // Count the number of paid enfants for the current month and year
+        $countPaidEnfants = $countAllEnfants - $enfantsNotPaid->count();
+        
+        // Calculate the percentage of paid enfants for the current month and year
+        $percentagePaidEnfants = ($countAllEnfants > 0) ? round(($countPaidEnfants / $countAllEnfants) * 100) : 0;
+        
+        // Calculate the total fees for all enfants
+        $totalFees = $enfants->sum('frais_inscription');
+        
+        // Get expenses for the recent month and year
+        $recentMonthExpenses = Depense::whereMonth('date', $currentMonth)
+                                      ->whereYear('date', $currentYear)
+                                      ->sum('prix');
+        
+        // Return the counts along with the list of unpaid enfants, 
+        // the percentage of paid enfants, the total fees, and recent month expenses
+        return view('home', compact('enfantsNotPaid', 'countAllEnfants', 'percentagePaidEnfants', 'totalFees', 'recentMonthExpenses'));
     }
     
-    // Filter enfants who haven't paid for the current month
-    $enfantsNotPaid = $enfants->reject(function ($enfant) use ($paidEnfantsIds) {
-        return in_array($enfant->id, $paidEnfantsIds);
-    });
     
-    // Count the number of all enfants
-    $countAllEnfants = $enfants->count();
     
-    // Count the number of paid enfants for the current month
-    $countPaidEnfants = $countAllEnfants - $enfantsNotPaid->count();
     
-    // Calculate the percentage of paid enfants for the current month
-    $percentagePaidEnfants = ($countAllEnfants > 0) ? round(($countPaidEnfants / $countAllEnfants) * 100) : 0;
-    
-    // Calculate the total fees for all enfants
-    $totalFees = $enfants->sum('frais_inscription');
-    
-    // Get expenses for the recent month
-    $recentMonthExpenses = Depense::whereMonth('date', $currentMonth)->sum('prix');
-    
-    // Return the counts along with the list of unpaid enfants, 
-    // the percentage of paid enfants, the total fees, and recent month expenses
-    return view('home', compact('enfantsNotPaid', 'countAllEnfants', 'percentagePaidEnfants', 'totalFees', 'recentMonthExpenses'));
-}
-
     
 
     
@@ -381,7 +386,7 @@ public function storepaiementmois(Request $request)
         // Fetch all paiements with associated enfant details
         $paiementsQuery = PaiementMoi::with('enfant')
             ->orderBy('annee', 'desc')
-            ->orderByRaw("FIELD(mois, 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre')");
+            ->orderByRaw("CAST(mois AS UNSIGNED) DESC");
     
         // Check if a year filter is applied
         if ($request->filled('year')) {
@@ -399,7 +404,7 @@ public function storepaiementmois(Request $request)
         // Get unique years
         $years = PaiementMoi::distinct()->pluck('annee')->toArray();
         $enfants = Enfant::all();
-
+    
         // Pass the paiements data, years, and the selected year to the view
         return view('enfant.listpaiementmois', [
             'paiements' => $paiements,
@@ -407,6 +412,7 @@ public function storepaiementmois(Request $request)
             'enfants' => $enfants,
         ]);
     }
+    
     
     
   
