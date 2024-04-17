@@ -22,7 +22,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 dépense (mensuels)</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">500 dt</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$recentMonthExpenses}}  </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -151,7 +151,7 @@
     </div>
     
 </div>
-<div class="progress">
+<div class="progress" style="margin-top:390px">
     @php
     // Get the current date
     $currentDate = \Carbon\Carbon::now();

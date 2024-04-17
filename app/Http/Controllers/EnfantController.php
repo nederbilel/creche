@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Enfant;
+use App\Models\Depense;
 use App\Models\Presence;
 use App\Models\PaiementAssurence;
 use App\Models\PaiementMoi;
 
 use Illuminate\Support\Facades\DB;
 
-use Carbon\Carbon; // Import Carbon for date manipulation
+use Carbon\Carbon; 
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -74,45 +75,54 @@ class EnfantController extends Controller
     }
     
     
+
     public function indexx()
-    {
-        // Get the current month
+{
+    // Get the current month
+    $currentMonth = Carbon::now()->format('m');
     
-        // Get all enfants
-        $enfants = Enfant::all();
+    // Get all enfants
+    $enfants = Enfant::all();
     
-        // Get paiements for the current month
-        $paiementmois = PaiementMoi::all();
+    // Get paiements for the current month
+// Get paiements for the current month
+$paiementmois = PaiementMoi::where('mois', $currentMonth)->get();
+// dd($paiementmois);
+
     
-        // Initialize an array to store the IDs of enfants who have paid
-        $paidEnfantsIds = [];
+    // Initialize an array to store the IDs of enfants who have paid
+    $paidEnfantsIds = [];
     
-        // Loop through paiements to collect paid enfants IDs
-        foreach ($paiementmois as $paiement) {
-            $paidEnfantsIds[] = $paiement->enfant_id;
-        }
-    
-        // Filter enfants who haven't paid
-        $enfantsNotPaid = $enfants->reject(function ($enfant) use ($paidEnfantsIds) {
-            return in_array($enfant->id, $paidEnfantsIds);
-        });
-    
-        // Count the number of all enfants
-        $countAllEnfants = $enfants->count();
-    
-        // Count the number of paid enfants
-        $countPaidEnfants = $countAllEnfants - $enfantsNotPaid->count();
-    
-        // Calculate the percentage of paid enfants
-        $percentagePaidEnfants = round(($countPaidEnfants / $countAllEnfants) * 100);
-    
-        // Calculate the total fees for all enfants
-        $totalFees = $enfants->sum('frais_inscription');
-    
-        // Return the counts along with the list of unpaid enfants, 
-        // the percentage of paid enfants, and the total fees
-        return view('home', compact('enfantsNotPaid', 'countAllEnfants', 'percentagePaidEnfants', 'totalFees'));
+    // Loop through paiements to collect paid enfants IDs
+    foreach ($paiementmois as $paiement) {
+        $paidEnfantsIds[] = $paiement->enfant_id;
     }
+    
+    // Filter enfants who haven't paid for the current month
+    $enfantsNotPaid = $enfants->reject(function ($enfant) use ($paidEnfantsIds) {
+        return in_array($enfant->id, $paidEnfantsIds);
+    });
+    
+    // Count the number of all enfants
+    $countAllEnfants = $enfants->count();
+    
+    // Count the number of paid enfants for the current month
+    $countPaidEnfants = $countAllEnfants - $enfantsNotPaid->count();
+    
+    // Calculate the percentage of paid enfants for the current month
+    $percentagePaidEnfants = ($countAllEnfants > 0) ? round(($countPaidEnfants / $countAllEnfants) * 100) : 0;
+    
+    // Calculate the total fees for all enfants
+    $totalFees = $enfants->sum('frais_inscription');
+    
+    // Get expenses for the recent month
+    $recentMonthExpenses = Depense::whereMonth('date', $currentMonth)->sum('prix');
+    
+    // Return the counts along with the list of unpaid enfants, 
+    // the percentage of paid enfants, the total fees, and recent month expenses
+    return view('home', compact('enfantsNotPaid', 'countAllEnfants', 'percentagePaidEnfants', 'totalFees', 'recentMonthExpenses'));
+}
+
     
 
     

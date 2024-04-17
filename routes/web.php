@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnfantController;
+use App\Http\Controllers\DepenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,25 @@ Route::middleware('user')->group(function () {
     Route::get('/enfant/{enfant}/paiement/pdf/{year}/{month}', [EnfantController::class, 'generatePaiementPdf'])->name('enfant.paiement.pdf');
     
 
+
+
+    Route::get('/depenses/create', [DepenseController::class, 'create'])->name('depenses.create');
+    
+    // Route for storing a newly created Enfant
+    Route::post('/depenses', [DepenseController::class, 'store'])->name('depenses.store');
+    
+    // Route for displaying the details of a specific Enfant
+    Route::get('/depenses/{depense}', [DepenseController::class, 'show'])->name('depenses.show');
+    
+    // Route for displaying the form to edit a specific Enfant
+    Route::get('/depenses/{depense}/edit', [DepenseController::class, 'edit'])->name('depenses.edit');
+    
+    // Route for updating a specific Enfant
+    Route::put('/depenses/{depense}', [DepenseController::class, 'update'])->name('depenses.update');
+    
+    // Route for deleting a specific Enfant
+    Route::delete('/depenses/{depense}', [DepenseController::class, 'destroy'])->name('depenses.destroy');
+    Route::get('/depenses', [DepenseController::class, 'index'])->name('indexdepense');
 
 });
 

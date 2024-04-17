@@ -36,37 +36,37 @@
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="nom" class="form-label">Nom</label>
+                            <label for="nom" class="form-label" style="color : #2e90d6">Nom</label>
                             <p>{{ $enfant->nom }}</p>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="maladie" class="form-label">Maladie</label>
+                            <label for="maladie" class="form-label" style="color : #2e90d6">Maladie</label>
                             <p>{{ $enfant->maladie }}</p>
                         </div>
 
                         <div class="col-md-4 mb-4">
-                            <label for="date_de_naissance" class="form-label">Date de Naissance</label>
+                            <label for="date_de_naissance" class="form-label" style="color : #2e90d6">Date de Naissance</label>
                             <p>{{ $enfant->date_de_naissance }}</p>
                         </div>
 
                         <div class="col-md-4 mb-4">
-                            <label for="vaccin" class="form-label">Vaccin</label>
+                            <label for="vaccin" class="form-label" style="color : #2e90d6">Vaccin</label>
                             <p>{{ $enfant->vaccin }}</p>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="adresse" class="form-label">Adresse</label>
+                            <label for="adresse" class="form-label" style="color : #2e90d6">Adresse</label>
                             <p>{{ $enfant->adresse }}</p>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="avec_gouter" class="form-label">Description</label>
+                            <label for="avec_gouter" class="form-label" style="color : #2e90d6">Description</label>
                             <p>{{ $enfant->description }}</p>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="frais_inscription" class="form-label">Frais d'inscription</label>
+                            <label for="frais_inscription" class="form-label" style="color : #2e90d6">Frais d'inscription</label>
                             <p>{{ $enfant->frais_inscription }}</p>
                         </div>
                     </div>
@@ -75,36 +75,36 @@
                 <!-- Information Parents -->
                 <hr>
                 <div class="mb-4">
-                    <h4 class="text-decoration-underline fst-italic">Information Parents</h4>
+                    <h4 class="text-decoration-underline fst-italic" >Information Parents</h4>
 
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="nom_mere" class="form-label">Nom de la Mère</label>
+                            <label for="nom_mere" class="form-label" style="color : #2e90d6">Nom de la Mère</label>
                             <p>{{ $enfant->nom_mere }}</p>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="telephone1" class="form-label">Téléphone de la mère</label>
+                            <label for="telephone1" class="form-label" style="color : #2e90d6">Téléphone de la mère</label>
                             <p>{{ $enfant->telephone1 }}</p>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="travail_mere" class="form-label">Travail de la Mère</label>
+                            <label for="travail_mere" class="form-label" style="color : #2e90d6">Travail de la Mère</label>
                             <p>{{ $enfant->travail_mere }}</p>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="nom_pere" class="form-label">Nom du Père</label>
+                            <label for="nom_pere" class="form-label" style="color : #2e90d6">Nom du Père</label>
                             <p>{{ $enfant->nom_pere }}</p>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="telephone2" class="form-label">Téléphone du Père</label>
+                            <label for="telephone2" class="form-label" style="color : #2e90d6">Téléphone du Père</label>
                             <p>{{ $enfant->telephone2 }}</p>
                         </div>
 
                         <div class="col-md-4 mb-3">
-                            <label for="travail_pere" class="form-label">Travail du Père</label>
+                            <label for="travail_pere" class="form-label" style="color : #2e90d6">Travail du Père</label>
                             <p>{{ $enfant->travail_pere }}</p>
                         </div>
                     </div>
