@@ -28,6 +28,7 @@ class EnfantController extends Controller
             'telephone2' => 'required|string|max:8|min:8',
             'travail_pere' => 'required|string|max:255',
             'travail_mere' => 'required|string|max:255',
+            'sexe' => 'required|string',
             'vaccin' => 'required|string|max:255',
             'adresse' => 'required|string|max:255',
             'maladie' => 'required|string|max:255',
@@ -105,7 +106,16 @@ class EnfantController extends Controller
         
         // Count the number of all enfants
         $countAllEnfants = $enfants->count();
-        
+       // Assuming $enfants is a collection of child objects
+
+// Counting boys
+$countboys = $enfants->where('sexe', 'Garçon')->count();
+
+// Counting girls
+$countgirls = $enfants->where('sexe', 'Fille')->count();
+
+// dd($countgirls);
+// dd($countboys);
         // Count the number of paid enfants for the current month and year
         $countPaidEnfants = $countAllEnfants - $enfantsNotPaid->count();
         
@@ -122,7 +132,7 @@ class EnfantController extends Controller
         
         // Return the counts along with the list of unpaid enfants, 
         // the percentage of paid enfants, the total fees, and recent month expenses
-        return view('home', compact('enfantsNotPaid', 'countAllEnfants', 'percentagePaidEnfants', 'totalFees', 'recentMonthExpenses'));
+        return view('home', compact('countboys','countgirls','enfantsNotPaid', 'countAllEnfants', 'percentagePaidEnfants', 'totalFees', 'recentMonthExpenses'));
     }
     
     

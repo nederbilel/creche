@@ -162,7 +162,7 @@ var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
 
 var chLine = document.getElementById("chLine");
 var chartData = {
-  labels: [ "Dim","Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+  labels: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
   datasets: [{
     data: [, 6, 8, 9, 7, 6, 7],
     backgroundColor: 'transparent',
@@ -178,16 +178,16 @@ if (chLine) {
     data: chartData,
     options: {
       scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true 
-          }
-        }],
-        xAxes: [{
+        y: {
           ticks: {
             beginAtZero: true
           }
-        }]
+        },
+        x: {
+          ticks: {
+            beginAtZero: true
+          }
+        }
       },
       legend: {
         display: false
@@ -196,7 +196,6 @@ if (chLine) {
     }
   });
 }
-
 
 
 
@@ -211,10 +210,11 @@ var chDonutData1 = {
       {
         backgroundColor: colors.slice(3,7),
         borderWidth: 0,
-        data: [74, 26]
+        data: [<?php echo $countboys; ?>, <?php echo $countgirls; ?>]
       }
     ]
 };
+
 
 var chDonut1 = document.getElementById("chDonut1");
 if (chDonut1) {
@@ -233,7 +233,7 @@ if (chDonut1) {
 
 
         </script>
-    </div>
+ 
 
 
 
@@ -241,20 +241,5 @@ if (chDonut1) {
 
 
 
-</div>
-<div class="progress" style="margin-top:75px">
-    @php
-    // Get the current date
-    $currentDate = \Carbon\Carbon::now();
-
-    // Get the total number of days in the current month
-    $totalDaysInMonth = $currentDate->daysInMonth;
-
-    // Calculate the progress percentage
-    $progressPercentage = ($currentDate->day / $totalDaysInMonth) * 100;
-    @endphp
-
-    <div class="progress-bar" role="progressbar" aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progressPercentage }}%"></div>
-</div>
 
 @endsection

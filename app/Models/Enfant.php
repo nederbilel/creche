@@ -27,6 +27,7 @@ class Enfant extends Model
         'description',
         'picture_path',
         'frais_inscription',
+        'sexe',
     ];
 
 }

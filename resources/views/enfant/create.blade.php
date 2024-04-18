@@ -70,6 +70,15 @@
                         @enderror
                     </div>
 
+                    <div class="form-group">
+                        <label for="mois">Sexe :</label>
+                        <select class="form-control" id="sexe" name="sexe" required>
+                            <option value="Garçon">Garçon</option>
+                            <option value="Fille">Fille</option>
+                            
+                        </select>
+                    </div>
+
                     <div class="col-sm-4">
                         <label for="adresse" class="form-label">Adresse</label>
                         <input type="text" id="adresse" name="adresse" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0" >
