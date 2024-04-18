@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnfantController;
 use App\Http\Controllers\DepenseController;
+use App\Http\Controllers\PaiementMensuelController;
+use App\Http\Controllers\PaiementAssurenceController;
+use App\Http\Controllers\PresenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,73 +30,48 @@ Route::middleware('user')->group(function () {
 
     Route::get('/home', [EnfantController::class, 'indexx'])->name('home');
     Route::get('/enfants/count', [EnfantController::class, 'count'])->name('enfants.count');
-    
-    // Route for displaying the form to create a new Enfant
     Route::get('/enfants/create', [EnfantController::class, 'create'])->name('enfants.create');
-    
-    // Route for storing a newly created Enfant
     Route::post('/enfants', [EnfantController::class, 'store'])->name('enfants.store');
-    
-    // Route for displaying the details of a specific Enfant
     Route::get('/enfants/{enfant}', [EnfantController::class, 'show'])->name('enfants.show');
-    
-    // Route for displaying the form to edit a specific Enfant
     Route::get('/enfants/{enfant}/edit', [EnfantController::class, 'edit'])->name('enfants.edit');
-    
-    // Route for updating a specific Enfant
     Route::put('/enfants/{enfant}', [EnfantController::class, 'update'])->name('enfants.update');
-    
-    // Route for deleting a specific Enfant
     Route::delete('/enfants/{enfant}', [EnfantController::class, 'destroy'])->name('enfants.destroy');
     Route::get('/enfants', [EnfantController::class, 'index'])->name('indexenfant');
     
     
-    Route::get('/presenceList', [EnfantController::class, 'presenceList'])->name('enfant.presence.list');
-    Route::get('/presence', [EnfantController::class, 'showPresenceView'])->name('enfant.presence');
-    Route::post('/presence', [EnfantController::class, 'storePresence'])->name('enfant.presence.submit');
-    Route::get('/enfant/{enfant}/presence/pdf/{year}/{month}', [EnfantController::class, 'generatePdf'])->name('enfant.presence.pdf');
+    Route::get('/presenceList', [PresenceController::class, 'presenceList'])->name('enfant.presence.list');
+    Route::get('/presence', [PresenceController::class, 'showPresenceView'])->name('enfant.presence');
+    Route::post('/presence', [PresenceController::class, 'storePresence'])->name('enfant.presence.submit');
+    Route::get('/enfant/{enfant}/presence/pdf/{year}/{month}', [PresenceController::class, 'generatePdf'])->name('enfant.presence.pdf');
     
     
     
-    Route::get('/paiement', [EnfantController::class, 'showPaiementView'])->name('enfant.paiement'); // form paiement
-    Route::get('/paiements/{paiement}/edit', [EnfantController::class, 'editpaiement'])->name('enfant.editpaiement');
-    Route::delete('/destroypaiement/{paiement}', [EnfantController::class, 'destroypaiement'])->name('enfant.destroypaiement');
-    Route::put('/paiements/{paiement}', [EnfantController::class, 'updatepaiement'])->name('paiement.update');
-    
-    Route::get('/paiementList', [EnfantController::class, 'paiementList'])->name('enfant.paiement.list');
-    Route::post('/paiement', [EnfantController::class, 'storePaiement'])->name('enfant.paiement.submit');
-    Route::get('/enfant/{enfant}/paiement/pdf/{year}', [EnfantController::class, 'generatePdf'])->name('enfant.paiement.pdf');
+    Route::get('/paiement', [PaiementAssurenceController::class, 'showPaiementView'])->name('enfant.paiement'); // form paiement
+    Route::get('/paiements/{paiement}/edit', [PaiementAssurenceController::class, 'editpaiement'])->name('enfant.editpaiement');
+    Route::delete('/destroypaiement/{paiement}', [PaiementAssurenceController::class, 'destroypaiement'])->name('enfant.destroypaiement');
+    Route::put('/paiements/{paiement}', [PaiementAssurenceController::class, 'updatepaiement'])->name('paiement.update');
+    Route::get('/paiementList', [PaiementAssurenceController::class, 'paiementList'])->name('enfant.paiement.list');
+    Route::post('/paiement', [PaiementAssurenceController::class, 'storePaiement'])->name('enfant.paiement.submit');
     
     
     
     
-    Route::get('/paiementmois', [EnfantController::class, 'showPaiementmoisView'])->name('enfant.paiementmois');
-    Route::get('/paiementmois/{paiement}/edit', [EnfantController::class, 'editpaiementmois'])->name('enfant.editpaiementmois');
-    Route::delete('/destroypaiementmois/{paiement}', [EnfantController::class, 'destroypaiementmois'])->name('enfant.destroypaiementmois');
-    Route::put('/paiementmois/{paiement}', [EnfantController::class, 'updatepaiementmois'])->name('paiementmois.update');
-    
-    Route::get('/paiementmoisList', [EnfantController::class, 'paiementmoisList'])->name('enfant.paiementmois.list');
-    Route::post('/paiementmois', [EnfantController::class, 'storepaiementmois'])->name('enfant.paiementmois.submit');
-    Route::get('/enfant/{enfant}/paiement/pdf/{year}/{month}', [EnfantController::class, 'generatePaiementPdf'])->name('enfant.paiement.pdf');
+    Route::get('/paiementmois', [PaiementMensuelController::class, 'showPaiementmoisView'])->name('enfant.paiementmois');
+    Route::get('/paiementmois/{paiement}/edit', [PaiementMensuelController::class, 'editpaiementmois'])->name('enfant.editpaiementmois');
+    Route::delete('/destroypaiementmois/{paiement}', [PaiementMensuelController::class, 'destroypaiementmois'])->name('enfant.destroypaiementmois');
+    Route::put('/paiementmois/{paiement}', [PaiementMensuelController::class, 'updatepaiementmois'])->name('paiementmois.update');
+    Route::get('/paiementmoisList', [PaiementMensuelController::class, 'paiementmoisList'])->name('enfant.paiementmois.list');
+    Route::post('/paiementmois', [PaiementMensuelController::class, 'storepaiementmois'])->name('enfant.paiementmois.submit');
+    Route::get('/enfant/{enfant}/paiement/pdf/{year}/{month}', [PaiementMensuelController::class, 'generatePaiementPdf'])->name('enfant.paiement.pdf');
     
 
 
 
     Route::get('/depenses/create', [DepenseController::class, 'create'])->name('depenses.create');
-    
-    // Route for storing a newly created Enfant
     Route::post('/depenses', [DepenseController::class, 'store'])->name('depenses.store');
-    
-    // Route for displaying the details of a specific Enfant
     Route::get('/depenses/{depense}', [DepenseController::class, 'show'])->name('depenses.show');
-    
-    // Route for displaying the form to edit a specific Enfant
     Route::get('/depenses/{depense}/edit', [DepenseController::class, 'edit'])->name('depenses.edit');
-    
-    // Route for updating a specific Enfant
     Route::put('/depenses/{depense}', [DepenseController::class, 'update'])->name('depenses.update');
-    
-    // Route for deleting a specific Enfant
     Route::delete('/depenses/{depense}', [DepenseController::class, 'destroy'])->name('depenses.destroy');
     Route::get('/depenses', [DepenseController::class, 'index'])->name('indexdepense');
 

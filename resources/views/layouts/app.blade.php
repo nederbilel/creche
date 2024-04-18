@@ -74,7 +74,7 @@
             </div>
         </nav>
 
-        <main style="background-image: url('/img/creche.jpg'); background-size: cover; height:1080px;">
+        <main >
             @yield('content')
         </main>
         
