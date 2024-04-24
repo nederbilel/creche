@@ -36,13 +36,25 @@
                     </div>
 
                     <div class="col-sm-4">
-                        <label for="nom" class="form-label">Nom</label>
+                        <label for="nom" class="form-label">Nom et Prenom</label>
                         <input type="text" id="nom" name="nom" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0" >
                         @error('nom')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+ <div class="col-sm-4">
+                        <label for="date_de_naissance" class="form-label">Date de Naissance</label>
+                        <input type="date" id="date_de_naissance" name="date_de_naissance" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0" >
+                        @error('date_de_naissance')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                </div>
 
+
+                <div class="row mb-3">
+                   
                     <div class="col-sm-4">
                         <label for="maladie" class="form-label">Maladie</label>
                         <input type="text" id="maladie" name="maladie" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0">
@@ -50,34 +62,27 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                </div>
-
-
-                <div class="row mb-3">
-                    <div class="col-sm-4">
-                        <label for="date_de_naissance" class="form-label">Date de Naissance</label>
-                        <input type="date" id="date_de_naissance" name="date_de_naissance" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0" >
-                        @error('date_de_naissance')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-
                     <div class="col-sm-4">
                         <label for="vaccin" class="form-label">Vaccin</label>
                         <input type="text" id="vaccin" name="vaccin" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0" >
                         @error('vaccin')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
+
+                    
+
+
                     </div>
 
-                    <div class="form-group">
+                        <div class="col-sm-4">
+
                         <label for="mois">Sexe :</label>
                         <select class="form-control" id="sexe" name="sexe" required>
                             <option value="Garçon">Garçon</option>
                             <option value="Fille">Fille</option>
                             
                         </select>
-                    </div>
+                        </div>
 
                     <div class="col-sm-4">
                         <label for="adresse" class="form-label">Adresse</label>
@@ -95,6 +100,18 @@
                             <label class="form-check-label" for="toute_journee">Toute la journée</label>
                         </div>
                     </div>
+                   
+                    <div class="col-sm-6">
+                        <div class="form-check">
+                            <input type="checkbox" id="avec_gouter" name="avec_gouter" value="true" class="form-check-input">
+                            <label class="form-check-label" for="avec_gouter">Avec Goûter</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    
+             
 
                     <div class="col-sm-6">
                         <div class="form-check">
@@ -102,22 +119,13 @@
                             <label class="form-check-label" for="Demi-journée">Demi-journée</label>
                         </div>
                     </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col-sm-6">
-                        <div class="form-check">
-                            <input type="checkbox" id="avec_gouter" name="avec_gouter" value="true" class="form-check-input">
-                            <label class="form-check-label" for="avec_gouter">Avec Goûter</label>
-                        </div>
-                    </div>
+                  
                     <div class="col-sm-6">
                         <div class="form-check">
                             <input type="checkbox" id="sans_gouter" name="sans_gouter" value="true" class="form-check-input">
                             <label class="form-check-label" for="avec_gouter">Sans Goûter</label>
                         </div>
                     </div>
-
                 </div>
           
                 <div class="row mb-3">
