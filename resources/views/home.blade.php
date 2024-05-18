@@ -102,31 +102,10 @@
         </div>
     </div>
 
-    <!-- Content Row -->
 
-    {{-- <button id="unpaidEnfantsBtn" type="button" class="btn btn-lg btn-danger">
-        Enfants non payés
-    </button>
-    
-    <div id="unpaidEnfantsPopover" class="popover d-none">
-        <div class="arrow"></div>
-        <h3 class="popover-header">Enfants non payés</h3>
-        <div class="popover-body">
-            @foreach ($enfantsNotPaid as $item)
-                <span class="text-muted">{{ $item->nom }}</span><br>
-            @endforeach
-        </div>
-    </div> --}}
-    
 
     <div class="row my-2">
-        <div class="col-md-6 py-1">
-            <div class="card">
-                <div class="card-body">
-                    <canvas id="chLine"></canvas>
-                </div>
-            </div>
-        </div>
+        
         <div class="col-md-3 py-1">
             <div class="card">
                 <div class="card-body">
