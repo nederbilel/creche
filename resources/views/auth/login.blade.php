@@ -36,7 +36,7 @@
               <input type="checkbox" class="form-check-input" id="rememberMe" name="remember">
               <label class="form-check-label" for="rememberMe">Souvenez-vous de moi</label>
               @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}" class="text-decoration-none float-end">Mot de passe oublié</a>
+                {{-- <a href="{{ route('password.request') }}" class="text-decoration-none float-end">Mot de passe oublié</a> --}}
               @endif
             </div>
           </div>
@@ -65,14 +65,14 @@
 }
 
 .form-2-wrapper {
-    background: #913bc625;
+    background: #a663d0b0;
     padding: 50px;
     border-radius: 8px;
 }
 input.form-control{
     padding: 11px;
     border: none;
-    border: 2px solid #3570b3b8;
+    border: 2px solid #f8f8f8b8;
     border-radius: 30px;
     background-color: transparent;
     font-family: Arial, Helvetica, sans-serif;

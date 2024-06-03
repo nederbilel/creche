@@ -11,15 +11,38 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon; 
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use PDF;
+
 
 class EnfantController extends Controller
 {
 
-    public function index()
+    public function generatePDF()
+    { dd($enfants);
+        $enfants = Enfant::all(); 
+       
+        $pdf = PDF::loadView('enfants.pdf', compact('enfants'));
+       
+        return $pdf->download('liste_enfants.pdf');
+    }
+
+
+
+    public function index(Request $request)
     {
-        $enfants = Enfant::all();
+        $search = $request->input('search');
+        
+        // Retrieve enfants based on search query or get all if no search query
+        $enfants = Enfant::when($search, function($query, $search) {
+            return $query->where('nom', 'LIKE', "%{$search}%");
+        })->get();
+    
         return view('enfant.index', compact('enfants'));
     }
+
+
+
+
 
     public function create()
     {
@@ -52,23 +75,42 @@ class EnfantController extends Controller
             'vaccin' => 'required|string|max:255',
             'adresse' => 'required|string|max:255',
             'maladie' => 'required|string|max:255',
-            'picture' => 'nullable|max:2048', 
-            'frais_inscription' => 'required|string|max:255', 
-
+            'picture' => 'nullable|image|max:2048',
+            'frais_inscription' => 'required|string|max:255',
+            'caret_enfant' => 'nullable|file',
+            'cin_parent' => 'nullable|file',
+            'certif_enfant' => 'nullable|file',
+            'extrait_de_naissance' => 'nullable|file',
         ]);
     
-        if ($request->hasFile('picture')) {
-            $path = $request->file('picture')->store('enfants', 'public');
+        // Initialize file paths array
+        $filePaths = [];
     
-            $request->merge(['picture_path' => $path]);
+        // Télécharger et stocker les fichiers s'ils sont présents
+        if ($request->hasFile('picture')) {
+            $filePaths['picture_path'] = $request->file('picture')->store('enfants', 'public');
+        }
+        if ($request->hasFile('caret_enfant')) {
+            $filePaths['caret_enfant'] = $request->file('caret_enfant')->store('enfants', 'public');
+        }
+        if ($request->hasFile('cin_parent')) {
+            $filePaths['cin_parent'] = $request->file('cin_parent')->store('enfants', 'public');
+        }
+        if ($request->hasFile('certif_enfant')) {
+            $filePaths['certif_enfant'] = $request->file('certif_enfant')->store('enfants', 'public');
+        }
+        if ($request->hasFile('extrait_de_naissance')) {
+            $filePaths['extrait_de_naissance'] = $request->file('extrait_de_naissance')->store('enfants', 'public');
         }
     
+        // Gérer la description
         $description = '';
     
         if ($request->has('avec_gouter')) {
             $description .= 'Avec Goûter ';
-
-        } if ($request->has('sans_gouter')) {
+        }
+    
+        if ($request->has('sans_gouter')) {
             $description .= 'Sans Goûter ';
         }
     
@@ -82,12 +124,21 @@ class EnfantController extends Controller
     
         $request->merge(['description' => $description]);
     
+        // Créer et sauvegarder l'enfant
         $enfant = new Enfant();
-        $enfant->fill($request->all());
+        $enfant->fill($request->except(['picture', 'caret_enfant', 'cin_parent', 'certif_enfant', 'extrait_de_naissance']));
+        
+        // Set the file paths on the enfant object
+        foreach ($filePaths as $key => $path) {
+            $enfant->{$key} = $path;
+        }
+    
         $enfant->save();
     
-        return redirect()->route('indexenfant')->with('success', 'Enfant ajouté avec succès');
+        return redirect()->route('enfants.index')->with('success', 'Enfant ajouté avec succès');
     }
+    
+    
     
     
 
@@ -180,7 +231,7 @@ class EnfantController extends Controller
     
         $enfant->update($request->all());
     
-        return redirect()->route('indexenfant')->with('success', 'Enfant modifié avec succès');
+        return redirect()->route('enfants.index')->with('success', 'Enfant modifié avec succès');
     }
     
     
@@ -189,7 +240,7 @@ class EnfantController extends Controller
     {
         $enfant->delete();
 
-        return redirect()->route('indexenfant')->with('success', 'Enfant supprimé avec succès');
+        return redirect()->route('enfants.index')->with('success', 'Enfant supprimé avec succès');
     }
    
     

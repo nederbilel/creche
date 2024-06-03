@@ -27,6 +27,15 @@ class PaiementAssurenceController extends Controller
             'date' => 'required|date',
             'valeur' => 'required|integer',
             'annee' => 'required|string|max:4|min:4',
+            'enfant_id' => [
+                'required',
+                'exists:enfants,id',
+                function ($attribute, $value, $fail) use ($request) {
+                    if (PaiementAssurence::where('enfant_id', $value)->where('annee', $request->annee)->exists()) {
+                        $fail('Cet enfant a déjà effectué un paiement pour cette année.');
+                    }
+                },
+            ],
         ]);
     
         $paiement = new PaiementAssurence();
@@ -37,8 +46,9 @@ class PaiementAssurenceController extends Controller
     
         $paiement->save();
     
-        return redirect()->route('enfant.paiement.list') ->with('success', 'Paiement créer avec succès.');
+        return redirect()->route('enfant.paiement.list')->with('success', 'Paiement créé avec succès.');
     }
+    
 
     public function destroypaiement(PaiementAssurence $paiement)
     {

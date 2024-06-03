@@ -87,9 +87,20 @@ class PaiementMensuelController extends Controller
             'date' => 'required|date',
             'valeur' => 'required|integer',
             'mois' => 'required|string',
-            'annee' => 'required|string|min:4|max:4',
-    
-    
+            'annee' => [
+                'required',
+                'string',
+                'min:4',
+                'max:4',
+                function ($attribute, $value, $fail) use ($request) {
+                    if (PaiementMoi::where('enfant_id', $request->enfant_id)
+                        ->where('mois', $request->mois)
+                        ->where('annee', $value)
+                        ->exists()) {
+                        $fail('Cet enfant a déjà effectué un paiement pour ce mois !');
+                    }
+                },
+            ],
         ]);
     
         $paiement = new PaiementMoi();
@@ -99,11 +110,12 @@ class PaiementMensuelController extends Controller
         $paiement->mois = $request->mois;
         $paiement->annee = $request->annee;
     
-    
         $paiement->save();
     
-        return redirect()->route('enfant.paiementmois.list') ->with('success', 'Paiement créer avec succès.');
+        return redirect()->route('enfant.paiementmois.list')->with('success', 'Paiement créé avec succès');
     }
+    
+    
 
     public function generatePaiementPdf(Enfant $enfant, $year, $month)
     {

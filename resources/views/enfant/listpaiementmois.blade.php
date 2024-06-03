@@ -31,7 +31,7 @@
 </div>
 @endif
 
-@if ($errors->any())
+{{-- @if ($errors->any())
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
@@ -39,7 +39,7 @@
         @endforeach
     </ul>
 </div>
-@endif
+@endif --}}
 
 <div class="container">
     <div class="row justify-content-center">
@@ -172,6 +172,17 @@
         </div>
     </div>
 </div>
+<!-- Error Messages (outside the modal) -->
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <!-- Modal for adding a new payment month -->
 <div class="modal fade" id="ajouterPaiementMoisModal" tabindex="-1" role="dialog" aria-labelledby="ajouterPaiementMoisModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -183,15 +194,25 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Include the form for adding a new payment month here -->
-                <!-- You can include the form you provided in your second code snippet -->
+                <!-- Error Messages (inside the modal) -->
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                <!-- Payment Form -->
                 <form action="{{ route('enfant.paiementmois.submit') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="nom_enfant">Nom Enfant:</label>
                         <select name="enfant_id" class="form-control">
                             @foreach($enfants as $enfant)
-                                <option value="{{ $enfant->id }}">{{ $enfant->nom }}</option>
+                            <option value="{{ $enfant->id }}">{{ $enfant->nom }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -208,9 +229,9 @@
                         <label for="valeur">Année:</label>
                         <input type="number" name="annee" class="form-control">
                     </div>
-                
+
                     <div class="form-group">
-                        <label for="mois">Mois :</label>
+                        <label for="valeur">Mois :</label>
                         <select class="form-control" id="mois" name="mois" required>
                             <option value="">Sélectionner un mois</option>
                             <option value="01">Janvier</option>
@@ -227,13 +248,20 @@
                             <option value="12">Décembre</option>
                         </select>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+@if ($errors->any())
+<script>
+    $(document).ready(function() {
+        $('#ajouterPaiementMoisModal').modal('show');
+    });
+</script>
+@endif
 
 @endsection
 
@@ -273,5 +301,15 @@
             }
         });
     }
+    
+    $(document).ready(function() {
+        console.log("Document is ready.");
+        @if ($errors->any())
+        console.log("Errors found. Showing modal...");
+        $('#ajouterPaiementMoisModal').modal('show');
+        @endif
+    });
+
 </script>
+
 

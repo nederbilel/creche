@@ -14,7 +14,13 @@
         <link href="/css/styles.css" rel="stylesheet" />
         <link href="/css/bootstrap.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+<!-- Add this in the <head> section of your layout -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Add this before the closing </body> tag of your layout -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
         {{-- <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script> --}}
       <style>
         /* Apply the Roboto font to the body */
@@ -57,7 +63,7 @@ h1, h2, h3 {
     </head>
     <body class="sb-nav-fixed">
       
-        <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #2e90d6;">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #0077ef;">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="/home">
                 <img src="/img/logo.png" alt="Logo" class="me-2" style="width: 100px;height:100px;margin-top:20px"> <!-- Replace path_to_your_image with the actual path to your image -->
@@ -106,7 +112,7 @@ h1, h2, h3 {
 
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #2e90d6">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #0077ef">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>

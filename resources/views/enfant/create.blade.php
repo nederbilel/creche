@@ -1,15 +1,19 @@
 @extends('enfant.app')
+   {{-- @if ($errors->any())
+   <div style="margin-left:200px;margin-top:100px;">
 
-@section('content')
-@if ($errors->any())
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
+            <li>{{ $error }}</div>
         @endforeach
     </ul>
 </div>
-@endif
+</div>
+@endif  --}}
+
+@section('content')
+
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb" style="background-color: #ffffff">
         <li class="breadcrumb-item"><a href="/home" style="color :#2e90d6">Home</a></li>
@@ -25,6 +29,7 @@
 
                 <h4 class="text-decoration-underline fst-italic">Information Enfant</h4>
                 <div class="row mb-3" style="margin-top: 30px">
+
                     <div class="col-sm-4">
                         <label for="picture" class="form-label">Photo Enfant</label>
                         <div class="input-group">
@@ -60,8 +65,12 @@
                         @enderror
                     </div>
                     <div class="col-sm-4">
-                        <label for="vaccin" class="form-label">Vaccin</label>
-                        <input type="text" id="vaccin" name="vaccin" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0" value="{{ old('vaccin') }}">
+                        <label class="form-label">Vaccin</label>
+                        <div>
+                            <input type="radio" id="vaccin_oui" name="vaccin_radio" value="oui" {{ old('vaccin_radio') == 'oui' ? 'checked' : '' }}> Oui
+                            <input type="radio" id="vaccin_no" name="vaccin_radio" value="no" {{ old('vaccin_radio') == 'no' ? 'checked' : '' }}> Non
+                        </div>
+                        <input type="text" id="vaccin_detail" name="vaccin" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0 mt-2" value="{{ old('vaccin') }}" style="display: none;">
                         @error('vaccin')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -83,7 +92,52 @@
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
+                </div>
+
+                <div class="row mb-3">
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label for="caret_enfant" class="form-label">Carnet Enfant </label>
+                            <input type="file" id="caret_enfant" name="caret_enfant" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0">
+                            @error('caret_enfant')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="cin_parent" class="form-label">CIN Parent </label>
+                            <input type="file" id="cin_parent" name="cin_parent" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0">
+                            @error('cin_parent')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="certif_enfant" class="form-label">Certif Enfant </label>
+                            <input type="file" id="certif_enfant" name="certif_enfant" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0">
+                            @error('certif_enfant')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <label for="extrait_de_naissance" class="form-label">Extrait de Naissance </label>
+                            <input type="file" id="extrait_de_naissance" name="extrait_de_naissance" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0">
+                            @error('extrait_de_naissance')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <!-- Ajouter le champ Extrait_de_naissance -->
+              
+
+
+                <div class="row mb-3">
                     <div class="col-sm-6">
                         <div class="form-check">
                             <input type="checkbox" id="toute_journee" name="toute_journee" value="true" class="form-check-input" {{ old('toute_journee') ? 'checked' : '' }}>
@@ -129,7 +183,7 @@
                 <div class="row mb-3" style="margin-top: 30px">
                     <div class="row mb-3">
                         <div class="col-sm-4">
-                            <label for="nom_mere" class="form-label">Nom de la Mère</label>
+                            <label for="nom_mere" class="form-label">Nom et Prenom de la Mère</label>
                             <input type="text" id="nom_mere" name="nom_mere" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0" value="{{ old('nom_mere') }}">
                             @error('nom_mere')
                                 <div class="text-danger">{{ $message }}</div>
@@ -154,7 +208,7 @@
 
                 <div class="row mb-3">
                     <div class="col-sm-4">
-                        <label for="nom_pere" class="form-label">Nom du Père</label>
+                        <label for="nom_pere" class="form-label">Nom et prenom du Père</label>
                         <input type="text" id="nom_pere" name="nom_pere" class="form-control rounded-0 border-bottom border-top-0 border-left-0.5 border-right-0" value="{{ old('nom_pere') }}">
                         @error('nom_pere')
                             <div class="text-danger">{{ $message }}</div>
@@ -193,6 +247,9 @@
         var demiJourneeCheckbox = document.getElementById('Demi-journée');
         var avec_gouterCheckbox = document.getElementById('avec_gouter');
         var sans_gouterCheckbox = document.getElementById('sans_gouter');
+        var vaccinOuiRadio = document.getElementById('vaccin_oui');
+        var vaccinNoRadio = document.getElementById('vaccin_no');
+        var vaccinDetailInput = document.getElementById('vaccin_detail');
 
         touteJourneeCheckbox.addEventListener('change', function() {
             if (touteJourneeCheckbox.checked) {
@@ -217,6 +274,36 @@
                 sans_gouterCheckbox.checked = false;
             }
         });
+
+        vaccinOuiRadio.addEventListener('change', function() {
+            if (vaccinOuiRadio.checked) {
+                vaccinDetailInput.style.display = 'block';
+                vaccinDetailInput.required = true;
+                vaccinDetailInput.name = 'vaccin';
+            }
+        });
+
+        vaccinNoRadio.addEventListener('change', function() {
+            if (vaccinNoRadio.checked) {
+                vaccinDetailInput.style.display = 'none';
+                vaccinDetailInput.required = false;
+                vaccinDetailInput.name = 'vaccin';
+                vaccinDetailInput.value = 'non';
+            }
+        });
+
+        // Show or hide the vaccin detail input based on the old value
+        if (vaccinOuiRadio.checked) {
+            vaccinDetailInput.style.display = 'block';
+            vaccinDetailInput.required = true;
+        } else if (vaccinNoRadio.checked) {
+            vaccinDetailInput.style.display = 'none';
+            vaccinDetailInput.required = false;
+            vaccinDetailInput.value = 'non';
+        } else {
+            vaccinDetailInput.style.display = 'none';
+            vaccinDetailInput.required = false;
+        }
     });
 
     function validateForm() {
@@ -232,6 +319,18 @@
                 input.classList.remove('is-invalid');
             }
         });
+
+        // Ensure the vaccin field is correctly handled
+        var vaccinOuiRadio = document.getElementById('vaccin_oui');
+        var vaccinNoRadio = document.getElementById('vaccin_no');
+        var vaccinDetailInput = document.getElementById('vaccin_detail');
+        
+        if (vaccinOuiRadio.checked) {
+            vaccinDetailInput.name = 'vaccin';
+        } else if (vaccinNoRadio.checked) {
+            vaccinDetailInput.name = 'vaccin';
+            vaccinDetailInput.value = 'non';
+        }
 
         if (valid) {
             form.submit();

@@ -8,13 +8,20 @@
         <li class="breadcrumb-item active" aria-current="page">Paiement Assurances</li>
     </ol>
 </nav>
+
 @if (session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
 </div>
 @endif
+
+@if (session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif
+
 <div class="container">
-   
     <div class="row justify-content-center">
         <div class="col-md-12"> 
             <div class="row justify-content-between align-items-center mb-3">
@@ -22,15 +29,14 @@
                     <h1>Liste des Paiements</h1>
                 </div>
                 <div class="col-auto">
-                    <button class="btn btn-success" id="newPaymentModalBtn" data-toggle="modal" data-target="#newPaymentModal"  style="background-color: #2e90d6;">Nouveau Paiement</button>
+                    <button class="btn btn-success" id="newPaymentModalBtn" data-toggle="modal" data-target="#newPaymentModal" style="background-color: #2e90d6;">Nouveau Paiement</button>
                 </div>
             </div>
 
             <form method="GET" action="{{ route('enfant.paiement.list') }}">
                 <div class="mb-12">
-                    <label for="year-filter" class="form-label">Selectionner l'année:</label>
-                    <select class="form-select" id="year-filter" name="year" onchange="this.form.submit()">
-                        <option value="">Toutes année</option>
+                    <select class="form-select" id="year-filter" name="year" onchange="this.form.submit()" style="width: 150px">
+                        <option value="">Toutes années</option>
                         @foreach($years as $year)
                             <option value="{{ $year }}" {{ $selectedYear == $year ? 'selected' : '' }}>{{ $year }}</option>
                         @endforeach
@@ -100,7 +106,7 @@
 </div>
 
 <!-- Modal for new payment -->
-<div class="modal fade" id="newPaymentModal" tabindex="-1" role="dialog" aria-labelledby="newPaymentModalLabel" aria-hidden="true">
+<div class="modal fade @if ($errors->any()) show @endif" id="newPaymentModal" tabindex="-1" role="dialog" aria-labelledby="newPaymentModalLabel" aria-hidden="true" @if ($errors->any()) style="display: block;" @endif>
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -110,6 +116,29 @@
                 </button>
             </div>
             <div class="modal-body">
+                <!-- Display flash messages inside the modal -->
+                @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
+
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
                 <form action="{{ route('enfant.paiement.submit') }}" method="POST">
                     @csrf
                     <div class="form-group">
@@ -132,10 +161,19 @@
                         <label for="annee">Année :</label>
                         <input type="text" name="annee" class="form-control" placeholder="Année">
                     </div>
-                    <button type="submit" class="btn btn-primary" >Valider</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+@if ($errors->any())
+<script>
+    $(document).ready(function() {
+        $('#newPaymentModal').modal('show');
+    });
+</script>
+@endif
+
 @endsection

@@ -36,9 +36,11 @@ Route::middleware('user')->group(function () {
     Route::get('/enfants/{enfant}/edit', [EnfantController::class, 'edit'])->name('enfants.edit');
     Route::put('/enfants/{enfant}', [EnfantController::class, 'update'])->name('enfants.update');
     Route::delete('/enfants/{enfant}', [EnfantController::class, 'destroy'])->name('enfants.destroy');
-    Route::get('/enfants', [EnfantController::class, 'index'])->name('indexenfant');
+    // Route::get('/enfants', [EnfantController::class, 'index'])->name('indexenfant');
     
-    
+    Route::get('/enfants', [EnfantController::class, 'index'])->name('enfants.index');
+    Route::get('/enfants/pdf', [EnfantController::class, 'generatePDF'])->name('enfants.pdf');
+
     Route::get('/presenceList', [PresenceController::class, 'presenceList'])->name('enfant.presence.list');
     Route::get('/presence', [PresenceController::class, 'showPresenceView'])->name('enfant.presence');
     Route::post('/presence', [PresenceController::class, 'storePresence'])->name('enfant.presence.submit');

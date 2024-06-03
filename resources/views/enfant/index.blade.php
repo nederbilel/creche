@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 @if (session('success'))
 <div class="alert alert-success">
     {{ session('success') }}
@@ -14,112 +13,126 @@
     {{ session('error') }}
 </div>
 @endif
-<nav aria-label="breadcrumb" >
+
+<nav aria-label="breadcrumb">
     <ol class="breadcrumb" style="background-color: #ffffff">
-        <li class="breadcrumb-item" > <a href="/home" style="color :#2e90d6">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">List d'enfants</a></li>
+        <li class="breadcrumb-item"><a href="/home" style="color: #2e90d6">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">List d'enfants</li>
     </ol>
 </nav>
 
-
 <div class="container">
- 
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="row justify-content-between align-items-center mb-3">
-                <div class="col">
-                    <h1>Liste des Enfants</h1>
-                </div>
-                <div class="col-auto">
-                    <a class="btn btn-success" href="{{ route('enfants.create') }}" style="background-color: #2e90d6;width:100px">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
-                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
-                            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-            
-            
-
-
-            <ul class="list-group">
-                @foreach ($enfants as $enfant)
-
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1>Liste des Enfants</h1>
+                <a class="btn btn-success" href="{{ route('enfants.create') }}" style="background-color: #2e90d6; width: 100px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+                    </svg>
+                </a>
+                <a class="btn btn-danger" href="{{ route('enfants.pdf') }}" target="_blank" style="background-color: #e3342f; color: white;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf" viewBox="0 0 16 16">
+                        <path d="M5.5 6a.5.5 0 0 0 0 1H6a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-1 0v.5h-.5zM5 7v1h1a.5.5 0 0 0 .5-.5v-1A.5.5 0 0 0 6 7H5zm1-1h1a.5.5 0 0 0 .5-.5v-1A.5.5 0 0 0 6 4H5v1h1a.5.5 0 0 0 .5.5V6zM3.5 6a.5.5 0 0 0 0 1H4v1H3.5a.5.5 0 0 0 0 1H4v.5a.5.5 0 0 0 1 0V9H5a.5.5 0 0 0 0-1H4V7h.5a.5.5 0 0 0 0-1H4V5.5a.5.5 0 0 0-1 0V6h.5zm7.5 0H10v1h1.5a.5.5 0 0 0 0-1zm0-1H10v1h1.5a.5.5 0 0 0 0-1zm0-1H10v1h1.5a.5.5 0 0 0 0-1zm-1.646.146a.5.5 0 0 1 .5-.146h.001c.315.08.546.4.546.778V8h1V5.67c0-.482-.266-.858-.586-1.014a1.5 1.5 0 0 0-1.574.146c-.24.184-.34.44-.42.63a.5.5 0 1 1-.926-.362c.094-.228.25-.47.482-.68z"/>
+                        <path d="M14 4.5V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h7.5L14 4.5zM12 5a.5.5 0 0 1-.5-.5V2.75H9.5a.5.5 0 0 1-.5-.5V1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5h-2z"/>
+                    </svg>
+                    Print PDF
+                </a>
                 
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div class="row mb-3">
-                        <div class="d-flex align-items-center">
-                            @if($enfant->picture_path)
-                            <div>
-                                <img src="{{ asset('storage/' . $enfant->picture_path) }}" alt="Enfant's Picture" style="width: 50px; height: 50px; border-radius: 50%;">
-                            </div>
-                            @endif
-                            <div class="ml-2">
-                                <span>{{ $enfant->nom }}</span>
-                            </div>
-                        </div>
-                    
-                        <div class="ml-3">
-                            <span>{{ $enfant->nom_mere }} - {{ $enfant->telephone1 }}</span>
-                        </div>
-                    
-                        <div class="ml-3">
-                            <span>{{ $enfant->nom_pere }} - {{ $enfant->telephone2 }}</span>
-                        </div>
+
+            </div>
+            <form method="GET" action="{{ route('enfants.index') }}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Rechercher par nom d'enfant" value="{{ request('search') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit">Rechercher</button>
                     </div>
-                    
-                    
-                    
-                    <div>
-                        <a class="btn btn-primary btn-sm mr-2" href="{{ route('enfants.show', $enfant->id) }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                          </svg>
-                        </a>
-                        <a class="btn btn-warning btn-sm mr-2" href="{{ route('enfants.edit', $enfant->id) }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                            </svg>
-                        </a>
-                        
-                        
-                        <!-- Delete Button with Modal -->
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $enfant->id }}">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                              </svg>
-                        </button>
-                        <!-- Delete Modal -->
-                        <div class="modal fade" id="deleteModal{{ $enfant->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $enfant->id }}" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteModalLabel{{ $enfant->id }}">Confirmer la suppression</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Êtes-vous sûr de vouloir supprimer cet enfant ?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                        <!-- Form to handle the actual delete action -->
-                                        <form method="POST" action="{{ route('enfants.destroy', $enfant->id) }}" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Confirmer</button>
-                                        </form>
+                </div>
+            </form>
+
+            <table class="table table-hover table-responsive">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Date de Naissance</th>
+                        <th scope="col">Coordonnées de la Mère</th>
+                        <th scope="col">Coordonnées du Père</th>
+                       
+                        <th scope="col">Vaccin</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Maladie</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($enfants as $enfant)
+                    <tr>
+                        <td class="text-center">
+                            @if($enfant->picture_path)
+                            <img src="{{ asset('storage/' . $enfant->picture_path) }}" alt="Enfant's Picture" class="img-thumbnail" style="width: 50px; height: 50px; border-radius: 50%;">
+                            @endif
+                        </td>
+                        <td>{{ $enfant->nom }}</td>
+                        <td>{{ $enfant->date_de_naissance }}</td>
+                        <td>{{ $enfant->nom_mere }}  {{ $enfant->telephone1 }}</td>
+                        <td>{{ $enfant->nom_pere }}  {{ $enfant->telephone2 }}</td>
+                       
+                        <td>{{ $enfant->vaccin }}</td>
+                        <td>{{ $enfant->adresse }}</td>
+                        <td>{{ $enfant->maladie }}</td>
+                        <td>{{ $enfant->description }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm mr-2" href="{{ route('enfants.show', $enfant->id) }}" data-toggle="tooltip" data-placement="top" title="Voir les détails">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                </svg>
+                            </a>
+                            <a class="btn btn-warning btn-sm mr-2" href="{{ route('enfants.edit', $enfant->id) }}" data-toggle="tooltip" data-placement="top" title="Modifier">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                </svg>
+                            </a>
+                            <!-- Delete Button with Modal -->
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $enfant->id }}" data-toggle="tooltip" data-placement="top" title="Supprimer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                </svg>
+                            </button>
+                            <!-- Delete Modal -->
+                            <div class="modal fade" id="deleteModal{{ $enfant->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $enfant->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel{{ $enfant->id }}">Confirmer la suppression</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Êtes-vous sûr de vouloir supprimer cet enfant ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                            <!-- Form to handle the actual delete action -->
+                                            <form method="POST" action="{{ route('enfants.destroy', $enfant->id) }}" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Confirmer</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

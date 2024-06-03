@@ -28,6 +28,10 @@ class Enfant extends Model
         'picture_path',
         'frais_inscription',
         'sexe',
+        'extrait_de_naissance',
+        'certif_enfant',
+        'cin_parent',
+        'caret_enfant',
     ];
 
 }
