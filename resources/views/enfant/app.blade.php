@@ -89,6 +89,7 @@ h1, h2, h3 {
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Add Member</a></li>
+                        <li><a class="dropdown-item" href="/parents/create">Ajouter Parent</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"

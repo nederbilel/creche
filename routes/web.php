@@ -6,6 +6,8 @@ use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\PaiementMensuelController;
 use App\Http\Controllers\PaiementAssurenceController;
 use App\Http\Controllers\PresenceController;
+use App\Http\Controllers\ParentController;
+use App\Http\Controllers\VisitorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +26,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::middleware('parent')->group(function () {
 
+Route::get('/homeparent', [VisitorController::class, 'homeparent'])->name('parent.home');
+
+});
 Route::middleware('user')->group(function () {
     // Define your dashboard routes here
 
@@ -40,6 +46,17 @@ Route::middleware('user')->group(function () {
     
     Route::get('/enfants', [EnfantController::class, 'index'])->name('enfants.index');
     Route::get('/enfants/pdf', [EnfantController::class, 'generatePDF'])->name('enfants.pdf');
+
+
+
+    Route::get('/parents/create', [ParentController::class, 'createparent'])->name('parents.create');
+    Route::post('/parents', [ParentController::class, 'storeparent'])->name('parents.store');
+    Route::get('/parents', [ParentController::class, 'indexparent'])->name('parents.index');
+    Route::get('/parents/{id}/edit', [ParentController::class, 'edit'])->name('parents.edit');
+    Route::put('/parents/{id}', [ParentController::class, 'update'])->name('parents.update');
+    Route::delete('/parents/{id}', [ParentController::class, 'destroy'])->name('parents.destroy');
+
+
 
     Route::get('/presenceList', [PresenceController::class, 'presenceList'])->name('enfant.presence.list');
     Route::get('/presence', [PresenceController::class, 'showPresenceView'])->name('enfant.presence');

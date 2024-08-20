@@ -32,17 +32,11 @@
                         <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
                     </svg>
                 </a>
-                <a class="btn btn-danger" href="{{ route('enfants.pdf') }}" target="_blank" style="background-color: #e3342f; color: white;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf" viewBox="0 0 16 16">
-                        <path d="M5.5 6a.5.5 0 0 0 0 1H6a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-1 0v.5h-.5zM5 7v1h1a.5.5 0 0 0 .5-.5v-1A.5.5 0 0 0 6 7H5zm1-1h1a.5.5 0 0 0 .5-.5v-1A.5.5 0 0 0 6 4H5v1h1a.5.5 0 0 0 .5.5V6zM3.5 6a.5.5 0 0 0 0 1H4v1H3.5a.5.5 0 0 0 0 1H4v.5a.5.5 0 0 0 1 0V9H5a.5.5 0 0 0 0-1H4V7h.5a.5.5 0 0 0 0-1H4V5.5a.5.5 0 0 0-1 0V6h.5zm7.5 0H10v1h1.5a.5.5 0 0 0 0-1zm0-1H10v1h1.5a.5.5 0 0 0 0-1zm0-1H10v1h1.5a.5.5 0 0 0 0-1zm-1.646.146a.5.5 0 0 1 .5-.146h.001c.315.08.546.4.546.778V8h1V5.67c0-.482-.266-.858-.586-1.014a1.5 1.5 0 0 0-1.574.146c-.24.184-.34.44-.42.63a.5.5 0 1 1-.926-.362c.094-.228.25-.47.482-.68z"/>
-                        <path d="M14 4.5V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h7.5L14 4.5zM12 5a.5.5 0 0 1-.5-.5V2.75H9.5a.5.5 0 0 1-.5-.5V1H3a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5h-2z"/>
-                    </svg>
-                    Print PDF
-                </a>
+         
                 
 
             </div>
-            <form method="GET" action="{{ route('enfants.index') }}" class="mb-3">
+            <form method="GET" action="{{ route('enfants.index') }}" class="mb-3" enctype="multipart/form-data">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Rechercher par nom d'enfant" value="{{ request('search') }}">
                     <div class="input-group-append">
