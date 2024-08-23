@@ -22,7 +22,17 @@ use App\Http\Controllers\VisitorController;
 
 Route::get('/', function () {
     return view('welcome');
+});Route::get('/about', function () {
+    return view('about');
+});Route::get('/services', function () {
+    return view('services');
+
+});Route::get('/contact', function () {
+    return view('contact');
+});Route::get('/blog', function () {
+    return view('blog');
 });
+
 
 Auth::routes();
 
