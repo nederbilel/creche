@@ -286,6 +286,9 @@ code {
 a > code {
   color: inherit;
 }
+.sb-sidenav-dark .sb-sidenav-menu .nav-link {
+  color: rgb(45 44 44);
+}
 
 kbd {
   padding: 0.1875rem 0.375rem;

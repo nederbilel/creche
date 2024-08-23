@@ -3,10 +3,9 @@
 <div class="container">
   <div class="row">
     <!-- Left Blank Side -->
-    <div class="col-lg-6"></div>
 
     <!-- Right Side Form -->
-    <div class="col-lg-6 d-flex align-items-center justify-content-center left-side">
+    <div class="col-lg-6 d-flex align-items-center justify-content-center right-side">
       <div class="form-2-wrapper">
         <div class="logo text-center">
             <img src="/img/logo.png" alt="Logo" class="me-2" style=""> 
@@ -44,9 +43,11 @@
         </form>
 
         <!-- Register Link -->
-        <p class="text-center register-test mt-3">Vous n’avez pas de compte ? <a href="{{ route('register') }}" class="text-decoration-none">Inscrivez-vous ici</a></p>
+        {{-- <p class="text-center register-test mt-3">Vous n’avez pas de compte ? <a href="{{ route('register') }}" class="text-decoration-none">Inscrivez-vous ici</a></p> --}}
       </div>
     </div>
+    <div class="col-lg-6"></div>
+
   </div>
 </div>
 <style>
@@ -56,7 +57,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('/img/R.jpg');
+    background: url('/img/creche.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -65,9 +66,11 @@
 }
 
 .form-2-wrapper {
-    background: #a663d0b0;
+    background: #F8E8EE;
+    ;
     padding: 50px;
     border-radius: 8px;
+    opacity: 0.9;
 }
 input.form-control{
     padding: 11px;
@@ -85,14 +88,14 @@ input.form-control:focus{
     background-color: transparent;
 }
 button.login-btn{
-    background: #9b26cd;
+    background: #be6f9c;
     color: #fff;
     border: none;
     padding: 10px;
     border-radius: 30px;
 }
 .register-test a{
-    color: #000;
+    color: #a38f8f;
 }
 
 </style>

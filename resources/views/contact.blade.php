@@ -130,33 +130,35 @@
                 </div>
               </div>
 
-              <form >
-                <div class="row">
-                  <div class="col-6">
-                    <div class="form-group">
-                      <label class="text-black" for="fname">First name</label>
-                      <input type="text" class="form-control" id="fname">
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-group">
-                      <label class="text-black" for="lname">Last name</label>
-                      <input type="text" class="form-control" id="lname">
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="text-black" for="email">Email address</label>
-                  <input type="email" class="form-control" id="email">
-                </div>
-
-                <div class="form-group mb-5">
-                  <label class="text-black" for="message">Message</label>
-                  <textarea name="" class="form-control" id="message" cols="30" rows="5"></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary-hover-outline">Send Message</button>
-              </form>
+			  <form method="POST" action="{{ route('store.message') }}">
+				@csrf  <!-- This directive generates a hidden input with a CSRF token -->
+				<div class="row">
+					<div class="col-6">
+						<div class="form-group">
+							<label class="text-black" for="fname">First name</label>
+							<input type="text" class="form-control" id="fname" name="prenom">
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="form-group">
+							<label class="text-black" for="lname">Last name</label>
+							<input type="text" class="form-control" id="lname" name="nom">
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="text-black" for="email">Email address</label>
+					<input type="email" class="form-control" id="email" name="email">
+				</div>
+			
+				<div class="form-group mb-5">
+					<label class="text-black" for="message">Message</label>
+					<textarea class="form-control" id="message" name="message" cols="30" rows="5"></textarea>
+				</div>
+			
+				<button type="submit" class="btn btn-primary-hover-outline">Send Message</button>
+			</form>
+			
 
             </div>
 

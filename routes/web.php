@@ -6,6 +6,7 @@ use App\Http\Controllers\DepenseController;
 use App\Http\Controllers\PaiementMensuelController;
 use App\Http\Controllers\PaiementAssurenceController;
 use App\Http\Controllers\PresenceController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\VisitorController;
 
@@ -32,6 +33,7 @@ Route::get('/', function () {
 });Route::get('/blog', function () {
     return view('blog');
 });
+Route::post('/message', [MessageController::class, 'store'])->name('store.message');
 
 
 Auth::routes();

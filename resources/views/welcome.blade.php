@@ -60,7 +60,7 @@
 				<div class="container">
 					<div class="row justify-content-between">
 						<div class="col-lg-5">
-							<div class="intro-excerpt">
+							<div class="intro-excerpt" style="width: 1200px">
 								<h1>Éveillons ensemble <span clsas="d-block">la curiosité de votre enfant.</span></h1>
 								<p class="mb-4">Encourager l'exploration et l'apprentissage dès le plus jeune âge. Des activités variées pour éveiller tous ses sens.</p>
 								<p><a href="#" class="btn btn-black-outline">Explore</a></p>

@@ -563,7 +563,8 @@ a {
     .footer-section .subscription-form h3 {
       font-size: 18px;
       font-weight: 500;
-      color: #3b5d50; }
+      color: #F8E8EE;
+      ; }
     .footer-section .subscription-form .form-control {
       height: 50px;
       border-radius: 10px;
@@ -572,7 +573,8 @@ a {
         outline: none;
         -webkit-box-shadow: none;
         box-shadow: none;
-        border-color: #3b5d50;
+        border-color: #F8E8EE;
+        ;
         -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
         box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2); }
       .footer-section .subscription-form .form-control::-webkit-input-placeholder {
@@ -603,7 +605,8 @@ a {
     font-size: 32px;
     font-weight: 500;
     text-decoration: none;
-    color: #3b5d50; }
+    color: #f2aec7;
+s    ; }
   .footer-section .custom-social li {
     margin: 2px;
     display: inline-block; }
@@ -614,10 +617,10 @@ a {
       line-height: 40px;
       display: inline-block;
       background: #dce5e4;
-      color: #3b5d50;
+      color: #f2aec7;
       border-radius: 50%; }
       .footer-section .custom-social li a:hover {
-        background: #3b5d50;
+        background: #e284a7;
         color: #ffffff; }
   .footer-section .border-top {
     border-color: #dce5e4; }
