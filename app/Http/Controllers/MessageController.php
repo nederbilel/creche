@@ -28,7 +28,7 @@ class MessageController extends Controller
         $message->save();
     
         // Redirect the user to the homepage or a different desired route with a success message
-        return view('welcome')->with('success', 'Message envoyé avec succès');
+        return redirect()->back()->with('success', 'Votre message a été envoyé avec succès !');
     }
     
 }
