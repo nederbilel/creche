@@ -34,6 +34,8 @@ Route::get('/', function () {
     return view('blog');
 });
 Route::post('/message', [MessageController::class, 'store'])->name('store.message');
+Route::get('/message/liste', [MessageController::class, 'index'])->name('message.index');
+Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
 
 
 Auth::routes();

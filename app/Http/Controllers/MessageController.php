@@ -30,5 +30,35 @@ class MessageController extends Controller
         // Redirect the user to the homepage or a different desired route with a success message
         return redirect()->back()->with('success', 'Votre message a été envoyé avec succès !');
     }
+
+
+    public function index(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
     
+        // Build the query
+        $query = Message::query();
+    
+        // Apply date range filter if provided
+        if ($startDate && $endDate) {
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        }
+    
+        // Sort by the most recent messages
+        $messages = $query->orderBy('created_at', 'desc')->get();
+    
+
+    return view('enfant.listmessage', compact('messages'));
+}
+
+
+    public function show($id)
+    {
+        // Fetch a single message by its ID
+        $message = Message::findOrFail($id);
+
+        // Pass the message to the view
+        return view('enfant.showmessage', compact('message'));
+    }
 }
