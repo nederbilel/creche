@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="neder" />
         <title>PTIBOO</title>
-        <link rel="icon" type="image/x-icon" href="/img/logo.png" />
+        <link rel="icon" type="image/x-icon" href="/img/logo-ETShipi2R-transformed.png" />
         {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0/css/bootstrap.min.css" rel="stylesheet"> --}}
 
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
@@ -63,10 +63,10 @@ h1, h2, h3 {
     </head>
     <body class="sb-nav-fixed">
       
-        <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #0077ef;">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #3778b9;">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="/home">
-                <img src="/img/logo.png" alt="Logo" class="me-2" style="width: 100px;height:100px;margin-top:20px"> <!-- Replace path_to_your_image with the actual path to your image -->
+                <img src="/img/logo-ETShipi2R-transformed.png" alt="Logo" class="me-2" style="width: 100px;height:100px;margin-top:20px"> <!-- Replace path_to_your_image with the actual path to your image -->
                 
             </a>            <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
@@ -113,7 +113,7 @@ h1, h2, h3 {
 
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #0077ef">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #3778b9">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
@@ -126,7 +126,17 @@ h1, h2, h3 {
                                 <span class="ms-2">Tableau de bord</span>
                             </a>
                             
-                            
+                             
+                            <div class="sb-sidenav-menu-heading">Espace Parent</div>
+
+                            <a class="nav-link" href="/activiteparent">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 16" style="margin-right: 8px;"> <!-- Added margin-right: 8px -->
+                                    <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                                </svg>
+                                Activité 
+                            </a>  
                            
                         </div>
                     </div>

@@ -70,6 +70,28 @@
                             </div>
                         </div>
 
+                        <!-- Enfant Selection Dropdown -->
+                        <div class="row mb-3">
+                            <label for="enfant_id" class="col-md-4 col-form-label text-md-end">{{ __('Enfant') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="enfant_id" class="form-control @error('enfant_id') is-invalid @enderror" name="enfant_id" required>
+                                    <option value="">Choisir un Enfant</option>
+                                    @foreach($enfants as $enfant)
+                                        <option value="{{ $enfant->id }}" {{ old('enfant_id') == $enfant->id ? 'selected' : '' }}>
+                                            {{ $enfant->nom }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('enfant_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

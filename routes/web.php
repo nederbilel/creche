@@ -9,6 +9,7 @@ use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ParentController;
 use App\Http\Controllers\VisitorController;
+use App\Http\Controllers\ActiviteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +43,14 @@ Auth::routes();
 
 Route::middleware('parent')->group(function () {
 
-Route::get('/homeparent', [VisitorController::class, 'homeparent'])->name('parent.home');
+    Route::get('/homeparent', [VisitorController::class, 'homeparent'])->name('parent.home');
+    Route::get('/activiteparent', [ActiviteController::class, 'indexparent'])->name('activitesparent.index');
+    Route::get('/activitesparent/{activite}', [ActiviteController::class, 'showparent'])->name('activitesparent.show');
 
 });
+
+
+
 Route::middleware('user')->group(function () {
     // Define your dashboard routes here
 
@@ -107,6 +113,14 @@ Route::middleware('user')->group(function () {
     Route::put('/depenses/{depense}', [DepenseController::class, 'update'])->name('depenses.update');
     Route::delete('/depenses/{depense}', [DepenseController::class, 'destroy'])->name('depenses.destroy');
     Route::get('/depenses', [DepenseController::class, 'index'])->name('indexdepense');
+
+    Route::get('/activites/create', [ActiviteController::class, 'create'])->name('activites.create');
+    Route::post('/activites', [ActiviteController::class, 'store'])->name('activites.store');
+    Route::get('/activites/{activite}/edit', [ActiviteController::class, 'edit'])->name('activites.edit');
+    Route::put('/activites/{activite}', [ActiviteController::class, 'update'])->name('activites.update');
+    Route::delete('/activites/{activite}', [ActiviteController::class, 'destroy'])->name('activites.destroy');
+    Route::get('/activites', [ActiviteController::class, 'index'])->name('activites.index');
+    Route::get('/activites/{activite}', [ActiviteController::class, 'show'])->name('activites.show');
 
 });
 

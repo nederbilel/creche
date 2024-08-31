@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Enfant;
+
 
 use Illuminate\Http\Request;
 
@@ -9,9 +11,14 @@ class ParentController extends Controller
 {
     
     public function createparent()
-    {
-        return view('enfant.createparent');
-    }
+{
+    // Retrieve all enfants from the database
+    $enfants = Enfant::all();
+
+    // Pass the enfants data to the view
+    return view('enfant.createparent', compact('enfants'));
+}
+
 
 
     public function storeparent(Request $request)
@@ -21,6 +28,7 @@ class ParentController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email', // Ensures email is unique
             'password' => 'required|string|min:8|confirmed', // Ensures the password is confirmed
+            'enfant_id' => 'required|exists:enfants,id', // Validate that the enfant_id exists in the enfants table
         ]);
     
         // Create a new instance of the User model
@@ -30,9 +38,8 @@ class ParentController extends Controller
         $user->name = $validatedData['name'];
         $user->email = $validatedData['email'];
         $user->password = bcrypt($validatedData['password']); // Hash the password before saving
-    
-        // Assign the user type as 'parent'
-        $user->usertype = 'parent';
+        $user->usertype = 'parent'; // Assign the user type as 'parent'
+        $user->enfant_id = $validatedData['enfant_id']; // Assign the enfant_id
     
         // Save the user to the database
         $user->save();
@@ -40,6 +47,7 @@ class ParentController extends Controller
         // Redirect the user to the desired route with a success message
         return redirect()->route('parents.index')->with('success', 'Parent ajouté avec succès');
     }
+    
     
 
     public function indexparent()

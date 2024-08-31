@@ -63,7 +63,7 @@ h1, h2, h3 {
     </head>
     <body class="sb-nav-fixed">
       
-        <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #8d586a;">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #7d3f55;">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="/home">
                 <img src="/img/logo-ETShipi2R-transformed.png" alt="Logo" class="me-2" style="width: 100px;height:100px;margin-top:20px"> <!-- Replace path_to_your_image with the actual path to your image -->
@@ -113,7 +113,7 @@ h1, h2, h3 {
 
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #8d586a">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #7d3f55">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
@@ -224,7 +224,7 @@ h1, h2, h3 {
                                     <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
                                 </svg>
                                 Messages 
-                            </a>     <a class="nav-link" href="/activites">
+                            </a>     <a class="nav-link" href="/activite">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 16" style="margin-right: 8px;"> <!-- Added margin-right: 8px -->
                                     <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
