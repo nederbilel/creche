@@ -14,20 +14,19 @@ class ActiviteController extends Controller
         $activites = Activite::all();
         return view('activites.index', compact('activites'));
     }
-    public function indexparent()
+    public function indexparent(Request $request)
     {
-        // Get the current date and time
-        $now = \Carbon\Carbon::now();
+        $startOfWeek = \Carbon\Carbon::now()->startOfWeek();
+        $endOfWeek = \Carbon\Carbon::now()->endOfWeek();
     
-        // Subtract 7 days to get the date a week ago
-        $weekAgo = $now->subDays(7);
+        $activites = Activite::whereBetween('created_at', [$startOfWeek, $endOfWeek])
+                             ->with(['photos', 'videos'])
+                             ->orderBy('created_at', 'desc')
+                             ->get();
     
-        // Retrieve activities created within the last week
-        $activites = Activite::where('created_at', '>=', $weekAgo)->get();
-    
-        // Pass the filtered activities to the view
         return view('parent.index', compact('activites'));
     }
+    
     
 
     // Show the form for creating a new resource.
@@ -89,35 +88,50 @@ class ActiviteController extends Controller
     // Update the specified resource in storage.
     public function update(Request $request, Activite $activite)
     {
+        // Validation
         $validatedData = $request->validate([
             'nom_activite' => 'required|string|max:255',
             'description_activite' => 'required|string',
-            'video' => 'nullable|file|mimes:mp4,avi,mkv|max:20480',  // 20 MB max
-            'photo' => 'nullable|file|mimes:jpg,jpeg,png|image|max:2048',  // 2 MB max
+            'photos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'videos.*' => 'mimetypes:video/avi,video/mpeg,video/quicktime,video/mp4|max:50000'
         ]);
-
-        // Handle video upload
-        if ($request->hasFile('video')) {
-            // Delete the old video if exists
-            if ($activite->video_url) {
-                Storage::disk('public')->delete($activite->video_url);
-            }
-            $validatedData['video_url'] = $request->file('video')->store('videos', 'public');
-        }
-
-        // Handle photo upload
-        if ($request->hasFile('photo')) {
-            // Delete the old photo if exists
-            if ($activite->photo_path) {
-                Storage::disk('public')->delete($activite->photo_path);
-            }
-            $validatedData['photo_path'] = $request->file('photo')->store('photos', 'public');
-        }
-
+    
+        // Update the Activite data
         $activite->update($validatedData);
-
+    
+        // Handle Photos
+        if($request->hasFile('photos')) {
+            // Optionally delete old photos if needed
+            foreach ($activite->photos as $photo) {
+                Storage::disk('public')->delete($photo->path);
+                $photo->delete();
+            }
+    
+            // Save new photos
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('photos', 'public');
+                $activite->photos()->create(['path' => $path]);
+            }
+        }
+    
+        // Handle Videos
+        if($request->hasFile('videos')) {
+            // Optionally delete old videos if needed
+            foreach ($activite->videos as $video) {
+                Storage::disk('public')->delete($video->path);
+                $video->delete();
+            }
+    
+            // Save new videos
+            foreach ($request->file('videos') as $video) {
+                $path = $video->store('videos', 'public');
+                $activite->videos()->create(['path' => $path]);
+            }
+        }
+    
         return redirect()->route('activites.index')->with('success', 'Activité mise à jour avec succès.');
     }
+    
 
     // Remove the specified resource from storage.
     public function destroy(Activite $activite)

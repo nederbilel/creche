@@ -87,9 +87,8 @@ h1, h2, h3 {
                         @endauth
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li><a class="dropdown-item" href="#">Add Member</a></li>
-                        <li><a class="dropdown-item" href="/parents/create">Ajouter Parent</a></li>
+                        <li><a class="dropdown-item" href="/profile">Profile</a></li>
+                        <li><a class="dropdown-item" href="/registermember">Add Member</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"
@@ -128,6 +127,7 @@ h1, h2, h3 {
                             
                             
                             <div class="sb-sidenav-menu-heading">Gérer</div>
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16" style="margin-right: 8px;"> <!-- Added margin-right: 8px -->
@@ -136,6 +136,7 @@ h1, h2, h3 {
                                 Enfants
                                 <div class="sb-sidenav-collapse-arrow" style="color:#030303"><i class="fas fa-angle-down"></i></div>
                             </a>
+                            
                             
                             
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -157,7 +158,15 @@ h1, h2, h3 {
                                 </nav>
                             </div>
                             
-                            
+                            <a class="nav-link" href="/parents">
+                                <div class="sb-nav-link-icon"><i class="bi bi-person-circle"></i></div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                                  </svg>
+                                <span class="ms-2">Parents</span>
+                            </a>
+
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16" style="margin-right: 8px;"> <!-- Added margin-right: 8px -->

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('activites', function (Blueprint $table) {
             $table->id();
             $table->string('nom_activite');
-            $table->string('description_activite');
+            $table->text('description_activite');
             $table->string('video_url')->nullable();  // Add column for storing video URL
             $table->string('photo_path')->nullable();  // Add column for storing photo path
             $table->timestamps();

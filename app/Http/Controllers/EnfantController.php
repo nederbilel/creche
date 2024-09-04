@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use App\Models\Enfant;
 use App\Models\Depense;
 use App\Models\Presence;
 use App\Models\PaiementMoi;
+use App\Models\User;
+
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon; 
 use Dompdf\Dompdf;
@@ -243,6 +247,59 @@ class EnfantController extends Controller
         return redirect()->route('enfants.index')->with('success', 'Enfant supprimé avec succès');
     }
    
+    public function registermember(Request $request)
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
     
+        $user = new User();
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+        $user->password = bcrypt($validatedData['password']); 
+        $user->usertype = 'admin'; 
+
+        $user->save();
+    
+        return redirect()->route('home')->with('success', 'Utilisateur a été enregistré avec succès !');
+    }
+    
+
+    public function editmember()
+    {
+        $user = Auth::user();
+        return view('enfant.editmember', compact('user'));
+    }
+
+    // Update the user's profile information
+    public function updatemember(Request $request)
+    {
+        $user = Auth::user();
+
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        // Update user information
+        $user->name = $validatedData['name'];
+        $user->email = $validatedData['email'];
+
+        // Update password if provided
+        if ($request->filled('password')) {
+            $user->password = Hash::make($validatedData['password']);
+        }
+
+        $user->save();
+
+        // Redirect with success message
+        return redirect()->route('editmember')->with('success', 'Profile updated successfully!');
+    }
+
     
 }

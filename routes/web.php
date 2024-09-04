@@ -54,6 +54,18 @@ Route::middleware('parent')->group(function () {
 Route::middleware('user')->group(function () {
     // Define your dashboard routes here
 
+
+    Route::get('/registermember', function () {
+        return view('enfant.register');
+    });
+    Route::post('/registermember', [EnfantController::class, 'registermember'])->name('registermember');
+// Display profile page
+Route::get('/profile', [EnfantController::class, 'editmember'])->name('editmember');
+
+// Update profile information
+Route::post('/profile', [EnfantController::class, 'updatemember'])->name('updatemember');
+
+
     Route::get('/home', [EnfantController::class, 'indexx'])->name('home');
     Route::get('/enfants/count', [EnfantController::class, 'count'])->name('enfants.count');
     Route::get('/enfants/create', [EnfantController::class, 'create'])->name('enfants.create');

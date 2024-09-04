@@ -87,9 +87,9 @@ h1, h2, h3 {
                         @endauth
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        {{-- <li><a class="dropdown-item" href="#">Profile</a></li>
                         <li><a class="dropdown-item" href="#">Add Member</a></li>
-                        <li><a class="dropdown-item" href="/parents/create">Ajouter Parent</a></li>
+                        <li><a class="dropdown-item" href="/parents/create">Ajouter Parent</a></li> --}}
                         <li><hr class="dropdown-divider" /></li>
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}"
@@ -116,27 +116,30 @@ h1, h2, h3 {
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #3778b9">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="/home">
+
+
+
+                              <div class="sb-sidenav-menu-heading">Espace Parent</div>
+                            <a class="nav-link" href="/activiteparent">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-speedometer2" viewBox="0 0 16 16">
                                     <path d="M13.573 2.427a1 1 0 0 1 1.414 1.414l-1.05 1.05a8 8 0 1 1-1.414-1.414l1.05-1.05zM8 4a6 6 0 1 0 0 12A6 6 0 0 0 8 4zM8 5a5 5 0 1 1 0 10A5 5 0 0 1 8 5zm2.354 1.646a.5.5 0 1 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L6 9.793l3.646-3.647z"/>
                                     <path d="M7 3h2v5H7V3z"/>
                                 </svg>
-                                <span class="ms-2">Tableau de bord</span>
+                                <span class="ms-2">Activité</span>
                             </a>
                             
-                             
-                            <div class="sb-sidenav-menu-heading">Espace Parent</div>
+                              <div class="sb-sidenav-menu-heading">Paiement</div>
 
-                            <a class="nav-link" href="/activiteparent">
+                            <a class="nav-link" href="/homeparent">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-check" viewBox="0 0 16 16" style="margin-right: 8px;"> <!-- Added margin-right: 8px -->
                                     <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
                                     <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
                                 </svg>
-                                Activité 
+                                Paiement Mensuel 
                             </a>  
+                           
                            
                         </div>
                     </div>

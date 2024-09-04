@@ -23,7 +23,7 @@ class UserMiddleware
             if ($user->usertype === 'admin') {
                 return $next($request);
             } elseif ($user->usertype === 'parent') {
-                return redirect()->route('parent.home'); // Redirect parents to their dashboard
+                return redirect()->route('activitesparent.index'); 
             }
         }
 
