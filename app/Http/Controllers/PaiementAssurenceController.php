@@ -17,7 +17,7 @@ class PaiementAssurenceController extends Controller
     {
         $enfants = Enfant::all();
 
-        return view('enfant.paiement', compact('enfants'));
+        return view('paiementAssurence.paiement', compact('enfants'));
     }
 
     public function storePaiement(Request $request)
@@ -74,7 +74,7 @@ class PaiementAssurenceController extends Controller
     
         $years = PaiementAssurence::distinct()->pluck('annee')->toArray();
     
-        return view('enfant.listpaiement', [
+        return view('paiementAssurence.listpaiement', [
             'paiements' => $paiements,
             'enfants' => $enfants,
             'years' => $years,
@@ -86,7 +86,7 @@ class PaiementAssurenceController extends Controller
     {
         $enfants = Enfant::all();
     
-        return view('enfant.editpaiement', compact('paiement', 'enfants'));
+        return view('paiementAssurence.editpaiement', compact('paiement', 'enfants'));
     }
     
 

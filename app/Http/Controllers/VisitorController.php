@@ -34,7 +34,7 @@ class VisitorController extends Controller
     });
 
     // Return the view with the enfant, paiements, and currentMonthPaid flag
-    return view('parent.home', compact('enfantId', 'enfant', 'paiements', 'currentMonthPaid'));
+    return view('dashboardParent.home', compact('enfantId', 'enfant', 'paiements', 'currentMonthPaid'));
 }
 
 

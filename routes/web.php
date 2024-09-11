@@ -56,7 +56,7 @@ Route::middleware('user')->group(function () {
 
 
     Route::get('/registermember', function () {
-        return view('enfant.register');
+        return view('user.register');
     });
     Route::post('/registermember', [EnfantController::class, 'registermember'])->name('registermember');
 // Display profile page
@@ -119,8 +119,8 @@ Route::post('/profile', [EnfantController::class, 'updatemember'])->name('update
 
 
     Route::get('/depenses/create', [DepenseController::class, 'create'])->name('depenses.create');
-    Route::post('/depenses', [DepenseController::class, 'store'])->name('depenses.store');
     Route::get('/depenses/{depense}', [DepenseController::class, 'show'])->name('depenses.show');
+    Route::post('/depenses', [DepenseController::class, 'store'])->name('depenses.store');
     Route::get('/depenses/{depense}/edit', [DepenseController::class, 'edit'])->name('depenses.edit');
     Route::put('/depenses/{depense}', [DepenseController::class, 'update'])->name('depenses.update');
     Route::delete('/depenses/{depense}', [DepenseController::class, 'destroy'])->name('depenses.destroy');

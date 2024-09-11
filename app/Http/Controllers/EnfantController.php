@@ -271,7 +271,7 @@ class EnfantController extends Controller
     public function editmember()
     {
         $user = Auth::user();
-        return view('enfant.editmember', compact('user'));
+        return view('profile.editmember', compact('user'));
     }
 
     // Update the user's profile information
@@ -298,7 +298,7 @@ class EnfantController extends Controller
         $user->save();
 
         // Redirect with success message
-        return redirect()->route('editmember')->with('success', 'Profile updated successfully!');
+        return redirect()->route('home')->with('success', 'Profile updated successfully!');
     }
 
     

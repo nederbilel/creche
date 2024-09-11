@@ -22,7 +22,7 @@ public function showPresenceView()
     $enfants = Enfant::all();
 
 
-    return view('enfant.presence', [
+    return view('presence.presence', [
         'month' => $month,
         'enfants' => $enfants, 
     ]);
@@ -44,7 +44,7 @@ public function showPresenceView()
                               ->where('enfant_id', $enfantId)
                               ->get();
     
-        return view('enfant.listpresence', compact('presences', 'month', 'year', 'enfants', 'enfantId'));
+        return view('presence.listpresence', compact('presences', 'month', 'year', 'enfants', 'enfantId'));
     }
 
 
@@ -99,7 +99,7 @@ public function showPresenceView()
     
         $monthName = \Carbon\Carbon::createFromDate($year, $month, 1)->locale('fr_FR')->isoFormat('MMMM');
     
-        $html = view('enfant.presence_pdf', compact('presences', 'monthName', 'enfant'))->render();
+        $html = view('presence.presence_pdf', compact('presences', 'monthName', 'enfant'))->render();
     
         $dompdf = new Dompdf();
     

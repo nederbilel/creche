@@ -24,7 +24,7 @@ class ActiviteController extends Controller
                              ->orderBy('created_at', 'desc')
                              ->get();
     
-        return view('parent.index', compact('activites'));
+        return view('dashboardParent.index', compact('activites'));
     }
     
     
@@ -76,7 +76,7 @@ class ActiviteController extends Controller
     }
  public function showparent(Activite $activite)
     {
-        return view('parent.show', compact('activite'));
+        return view('dashboardParent.show', compact('activite'));
     }
 
     // Show the form for editing the specified resource.

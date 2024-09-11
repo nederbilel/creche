@@ -49,7 +49,7 @@ class MessageController extends Controller
         $messages = $query->orderBy('created_at', 'desc')->get();
     
 
-    return view('enfant.listmessage', compact('messages'));
+    return view('message.listmessage', compact('messages'));
 }
 
 
@@ -59,6 +59,6 @@ class MessageController extends Controller
         $message = Message::findOrFail($id);
 
         // Pass the message to the view
-        return view('enfant.showmessage', compact('message'));
+        return view('message.showmessage', compact('message'));
     }
 }

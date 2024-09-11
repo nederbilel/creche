@@ -74,7 +74,22 @@
     <section id="hero" class="hero section dark-background">
 
       <img src="/img/main.jpg" alt="" data-aos="fade-in">
+<style>
+	/* Ensure the image scales properly */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Remove any unwanted bottom space */
+    margin: 0 auto; /* Center the image */
+}
 
+/* Optional: Add a max-width if you want to limit the image size */
+img.responsive {
+    max-width: 100%; /* Allows image to scale down */
+    height: auto; /* Maintain aspect ratio */
+}
+
+</style>
       <div class="container">
         <div class="row">
 			<div class="col-lg-10">
@@ -442,9 +457,9 @@
 		  <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-activity">
 			<img src="/img/color1.jpg" class="img-fluid" alt="">
 			<div class="portfolio-info">
-			  <h4>Activité de Dessin</h4>
-			  <p>Encourager l'expression artistique et la créativité des enfants à travers le dessin.</p>
-			  <a href="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Activité de Dessin" data-gallery="portfolio-gallery-activity" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+				<h4>Activité de Coloration</h4>
+				<p>Améliorer la concentration et la précision des enfants à travers la coloration.</p>
+				<a href="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Activité de Dessin" data-gallery="portfolio-gallery-activity" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
 			  <a href="portfolio-details.html" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
 			</div>
 		  </div><!-- End Portfolio Item -->
@@ -483,9 +498,7 @@
 		  <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-fete">
 			<img src="/img/aid.jpg" class="img-fluid" alt="">
 			<div class="portfolio-info">
-			  <h4>Fête de Fin d'Année</h4>
-			  <p>Une fête joyeuse pour célébrer les réalisations des enfants tout au long de l'année.</p>
-			  <a href="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Fête de Fin d'Année" data-gallery="portfolio-gallery-fete" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+				<h4>Aid El-Kebir</h4> <p>Une célébration traditionnelle marquant un moment de partage, de solidarité et de convivialité pour les familles et les enfants.</p><a href="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Fête de Fin d'Année" data-gallery="portfolio-gallery-fete" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
 			  <a href="portfolio-details.html" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
 			</div>
 		  </div><!-- End Portfolio Item -->
@@ -493,9 +506,8 @@
 		  <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-fete">
 			<img src="/img/fete2.jpg" class="img-fluid" alt="">
 			<div class="portfolio-info">
-			  <h4>Carnaval des Enfants</h4>
-			  <p>Un carnaval amusant où les enfants peuvent se déguiser et s'amuser ensemble.</p>
-			  <a href="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Carnaval des Enfants" data-gallery="portfolio-gallery-fete" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+				<h4>Festival du costume traditionnel</h4>
+				<p>Un événement festif où les enfants se parent de costumes traditionnels pour célébrer ensemble dans une ambiance ludique et conviviale.</p><a href="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Carnaval des Enfants" data-gallery="portfolio-gallery-fete" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
 			  <a href="portfolio-details.html" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
 			</div>
 		  </div><!-- End Portfolio Item -->
@@ -670,10 +682,9 @@
             <div class="member-img">
               <img src="/img/asma.jpg" class="img-fluid" alt="">
               <div class="social">
-                <a href="#"><i class="bi bi-twitter-x"></i></a>
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
+                <a href="https://www.facebook.com/asouma.asmaa1"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/asma.regaieg/"><i class="bi bi-instagram"></i></a>
+                {{-- <a href="#"><i class="bi bi-linkedin"></i></a> --}}
               </div>
             </div>
             <div class="member-info text-center">
@@ -687,12 +698,12 @@
           <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="200">
             <div class="member-img">
               <img src="/img/emna.jpg" class="img-fluid" alt="">
-              <div class="social">
+              {{-- <div class="social">
                 <a href="#"><i class="bi bi-twitter-x"></i></a>
                 <a href="#"><i class="bi bi-facebook"></i></a>
                 <a href="#"><i class="bi bi-instagram"></i></a>
                 <a href="#"><i class="bi bi-linkedin"></i></a>
-              </div>
+              </div> --}}
             </div>
 			<div class="member-info text-center">
 				<h4>Emna Ghroubi</h4>
@@ -705,16 +716,16 @@
           <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="300">
             <div class="member-img">
               <img src="/img/masmoudi.jpg" class="img-fluid" alt="">
-              <div class="social">
+              {{-- <div class="social">
                 <a href="#"><i class="bi bi-twitter-x"></i></a>
                 <a href="#"><i class="bi bi-facebook"></i></a>
                 <a href="#"><i class="bi bi-instagram"></i></a>
                 <a href="#"><i class="bi bi-linkedin"></i></a>
-              </div>
+              </div> --}}
             </div>
 			<div class="member-info text-center">
 				<h4>Mariem Drira</h4>
-				<span>Animatrice</span>
+				<span>Éveil Musical</span>
 				<p>Darine Massmoudi apporte son vaste expérience en éducation musicale pour créer des activités musicales engageantes et innovantes pour les jeunes enfants.</p>
 			  </div>
 			  
@@ -722,13 +733,13 @@
 
           <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="400">
             <div class="member-img">
-              <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-              <div class="social">
+              <img src="/img/person_4.jpg" class="img-fluid" alt="">
+              {{-- <div class="social">
                 <a href="#"><i class="bi bi-twitter-x"></i></a>
                 <a href="#"><i class="bi bi-facebook"></i></a>
                 <a href="#"><i class="bi bi-instagram"></i></a>
                 <a href="#"><i class="bi bi-linkedin"></i></a>
-              </div>
+              </div> --}}
             </div>
             <div class="member-info text-center">
               <h4>Ahlem houidi</h4>
@@ -833,7 +844,7 @@
 				  <div class="swiper-slide">
 					<div class="testimonial-item">
 					  <div class="d-flex">
-						<img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img flex-shrink-0" alt="">
+						<img src="/img/team/team-2.jpg" class="testimonial-img flex-shrink-0" alt="">
 						<div>
 						  <h3>Amal Abdedayem</h3>
 						  <h4>Parent</h4>
@@ -853,7 +864,7 @@
 				  <div class="swiper-slide">
 					<div class="testimonial-item">
 					  <div class="d-flex">
-						<img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img flex-shrink-0" alt="">
+						<img src="/img/team/team-6.jpg" class="testimonial-img flex-shrink-0" alt="">
 						<div>
 						  <h3>Khadija Safi</h3>
 						  <h4>Parent</h4>
@@ -873,7 +884,7 @@
 				  <div class="swiper-slide">
 					<div class="testimonial-item">
 					  <div class="d-flex">
-						<img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img flex-shrink-0" alt="">
+						<img src="/img/team/team-5.jpg" class="testimonial-img flex-shrink-0" alt="">
 						<div>
 						  <h3>Kamel Makni</h3>
 						  <h4>Parent</h4>
@@ -893,7 +904,7 @@
 				  <div class="swiper-slide">
 					<div class="testimonial-item">
 					  <div class="d-flex">
-						<img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img flex-shrink-0" alt="">
+						<img src="/img/team/team-4.jpg" class="testimonial-img flex-shrink-0" alt="">
 						<div>
 						  <h3>Aicha Benali</h3>
 						  <h4>Parent</h4>
@@ -963,7 +974,7 @@
 				  <img src="/img/ahmed.jpg" alt="" class="img-fluid">
 				</div>
 	  
-				<p class="post-category">Anniversaire</p>
+				{{-- <p class="post-category">Anniversaire -  Août 29, 2024</p> --}}
 	  
 				<h2 class="title">
 				  {{-- <a href="#">Ahmed Safi - 3 Ans</a> --}}
@@ -972,9 +983,9 @@
 				<div class="d-flex align-items-center">
 				  <div class="post-meta">
 					{{-- <p class="post-author">Événement</p> --}}
-					<p class="post-date">
+					{{-- <p class="post-date">
 					  <time datetime="2024-08-29">Août 29, 2024</time>
-					</p>
+					</p> --}}
 				  </div>
 				</div>
 	  
@@ -988,7 +999,7 @@
 				  <img src="/img/yahiya.jpg" alt="" class="img-fluid">
 				</div>
 	  
-				<p class="post-category">Anniversaire</p>
+				{{-- <p class="post-category">Anniversaire -  Juillet 05, 2024</p> --}}
 	  
 				<h2 class="title">
 				  {{-- <a href="#">Yahya Bouchaala - 2 Ans</a> --}}
@@ -997,9 +1008,9 @@
 				<div class="d-flex align-items-center">
 				  <div class="post-meta">
 					{{-- <p class="post-author">Événement</p> --}}
-					<p class="post-date">
-					  <time datetime="2024-08-29">Août 29, 2024</time>
-					</p>
+					{{-- <p class="post-date">
+					  <time datetime="2024-08-29">Juillet 05, 2024</time>
+					</p> --}}
 				  </div>
 				</div>
 	  
@@ -1013,7 +1024,7 @@
 				  <img src="/img/annif1.jpg" alt="" class="img-fluid">
 				</div>
 	  
-				<p class="post-category">Anniversaire</p>
+				{{-- <p class="post-category">Anniversaire -  Septembre 03, 2024</p> --}}
 	  
 				<h2 class="title">
 				  {{-- <a href="#">Sila Hdiji - 2 Ans</a> --}}
@@ -1022,9 +1033,9 @@
 				<div class="d-flex align-items-center">
 				  <div class="post-meta">
 					{{-- <p class="post-author">Événement</p> --}}
-					<p class="post-date">
-					  <time datetime="2024-08-29">Août 29, 2024</time>
-					</p>
+					{{-- <p class="post-date">
+						<time datetime="2024-08-29">Septembre 03, 2024</time>
+					  </p> --}}
 				  </div>
 				</div>
 	  
@@ -1187,9 +1198,9 @@
 			<h4>Liens Utiles</h4>
 			<ul>
 			  <li><a href="#">Accueil</a></li>
-			  <li><a href="#">À propos de nous</a></li>
-			  <li><a href="#">Services</a></li>
-			  <li><a href="#">Conditions de service</a></li>
+			  <li><a href="#about">À propos de nous</a></li>
+			  <li><a href="/#services">Services</a></li>
+			  {{-- <li><a href="#">Conditions de service</a></li> --}}
 			  <li><a href="#">Politique de confidentialité</a></li>
 			</ul>
 		  </div>
@@ -1211,13 +1222,13 @@
 
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="sitename">PtiBoo</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
+      {{-- <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you've purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
         Designed by <a href="https://bootstrapmade.com/">Neder</a>
-      </div>
+      </div> --}}
     </div>
 
   </footer>

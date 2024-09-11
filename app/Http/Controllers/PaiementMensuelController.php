@@ -35,7 +35,7 @@ class PaiementMensuelController extends Controller
     {
         $enfants = Enfant::all();
     
-        return view('enfant.editpaiementmois', compact('paiement', 'enfants'));
+        return view('paiementMensuel.editpaiementmois', compact('paiement', 'enfants'));
     }
     
     public function paiementmoisList(Request $request)
@@ -57,7 +57,7 @@ class PaiementMensuelController extends Controller
         $years = PaiementMoi::distinct()->pluck('annee')->toArray();
         $enfants = Enfant::all();
     
-        return view('enfant.listpaiementmois', [
+        return view('paiementMensuel.listpaiementmois', [
             'paiements' => $paiements,
             'years' => $years,
             'enfants' => $enfants,
@@ -76,7 +76,7 @@ class PaiementMensuelController extends Controller
     {
         $enfants = Enfant::all();
     
-        return view('enfant.paiementmois', compact('enfants'));
+        return view('paiementMensuel.paiementmois', compact('enfants'));
     }
 
 
@@ -124,7 +124,7 @@ class PaiementMensuelController extends Controller
                                 ->where('mois', $month)
                                 ->get();
     
-        $html = view('enfant.facture_pdf', compact('paiements', 'enfant', 'year', 'month'))->render();
+        $html = view('paiementMensuel.facture_pdf', compact('paiements', 'enfant', 'year', 'month'))->render();
     
         // Create a new Dompdf instance
         $dompdf = new Dompdf();

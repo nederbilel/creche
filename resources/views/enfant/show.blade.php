@@ -15,15 +15,14 @@
     <ol class="breadcrumb" style="background-color: #ffffff">
         <li class="breadcrumb-item"><a href="/home" style="color :#2e90d6">Home</a></li>
         <li class="breadcrumb-item"><a href="/enfants" style="color :#2e90d6">List d'enfants</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Nouveau enfant</li>
+        <li class="breadcrumb-item active" aria-current="page">{{ $enfant->nom }} </li>
     </ol>
 </nav>
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <form method="POST" action="{{ route('enfants.store') }}" enctype="multipart/form-data">
-                @csrf
+           
 
                 <!-- Information Enfant -->
                 <div class="mb-4">
@@ -149,7 +148,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 </div>

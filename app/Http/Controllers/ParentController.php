@@ -16,7 +16,7 @@ class ParentController extends Controller
     $enfants = Enfant::all();
 
     // Pass the enfants data to the view
-    return view('enfant.createparent', compact('enfants'));
+    return view('parent.createparent', compact('enfants'));
 }
 
 
@@ -54,13 +54,13 @@ class ParentController extends Controller
 {
     $parents = User::where('usertype', 'parent')->get();
 
-    return view('enfant.indexparent', compact('parents'));
+    return view('parent.indexparent', compact('parents'));
 }
 public function edit($id)
 {
     $parent = User::where('id', $id)->where('usertype', 'parent')->firstOrFail();
 
-    return view('enfant.editparent', compact('parent'));
+    return view('parent.editparent', compact('parent'));
 }
 public function update(Request $request, $id)
 {

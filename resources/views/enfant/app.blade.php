@@ -63,7 +63,7 @@ h1, h2, h3 {
     </head>
     <body class="sb-nav-fixed">
       
-        <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #8d586a;">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark" style="background-color: #7d3f55;">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="/home">
                 <img src="/img/logo-ETShipi2R-transformed.png" alt="Logo" class="me-2" style="width: 100px;height:100px;margin-top:20px"> <!-- Replace path_to_your_image with the actual path to your image -->
@@ -112,7 +112,7 @@ h1, h2, h3 {
 
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #8d586a">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion" style="background-color: #7d3f55">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
@@ -159,7 +159,7 @@ h1, h2, h3 {
                             </div>
                             
                             <a class="nav-link" href="/parents">
-                                <div class="sb-nav-link-icon"><i class="bi bi-person-circle"></i></div>
+                                <div class="sb-nav-link-icon"></div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                                     <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
